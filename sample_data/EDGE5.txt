@@ -1,7 +1,16 @@
-HOSTNAME: EDGE5
-VENDOR: Aruba
-MODEL: 6100
-DEVICE_TYPE: switch
-MGMT_IP: 10.0.2.5
-VLAN: 10 Users
-VLAN: 20 Voice
+ArubaOS-S Software
+hostname EDGE5
+Model number: 6100
+Management Address: 10.0.2.5
+-- show running-config --
+hostname EDGE5
+ip routing
+-- show lldp neighbors detail --
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

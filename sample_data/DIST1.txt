@@ -1,11 +1,41 @@
-HOSTNAME: DIST1
-VENDOR: Aruba
-MODEL: 6300
-DEVICE_TYPE: switch
-MGMT_IP: 10.0.1.1
-VLAN: 10 Users
-VLAN: 20 Voice
-NEIGHBOR: EDGE1,1/1/5,1,1G,copper,normal,switch
-NEIGHBOR: EDGE2,1/1/6,1,1G,copper,normal,switch
-NEIGHBOR: ACCESS1,1/1/7,1,1G,copper,normal,switch
-STP_BLOCKED: 1/1/6
+ArubaOS-S Software
+hostname DIST1
+Model number: 6300
+Management Address: 10.0.1.1
+-- show running-config --
+hostname DIST1
+ip routing
+-- show lldp neighbors detail --
+Local Port: 1/1/5
+Neighbor: EDGE1
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: copper
+Trunk: normal
+
+Local Port: 1/1/6
+Neighbor: EDGE2
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: copper
+Trunk: normal
+
+Local Port: 1/1/7
+Neighbor: ACCESS1
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: copper
+Trunk: normal
+
+-- show spanning-tree --
+BLK 1/1/6
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

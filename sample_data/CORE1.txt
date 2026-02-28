@@ -1,17 +1,77 @@
-HOSTNAME: CORE1
-VENDOR: Cisco
-MODEL: C9500
-DEVICE_TYPE: switch
-MGMT_IP: 10.0.0.1
-ROLE: L3,DHCP
-STP_ROOT: yes
-ROUTE: 0.0.0.0/0 via 10.0.0.254
-DHCP_SCOPE: VLAN10 10.10.10.0/24
-STACK_ID: core-stack
-VLAN: 10 Users
-VLAN: 20 Voice
-NEIGHBOR: CORE2,Te1/1,Te1/1,40G,stacking,stack,switch
-NEIGHBOR: DIST1,Te1/2,1/1/1,10G,fiber,Po10,switch
-NEIGHBOR: DIST1,Te1/3,1/1/2,10G,fiber,Po10,switch
-NEIGHBOR: DIST2,Te1/4,1/1/1,10G,fiber,Po20,switch
-NEIGHBOR: DIST2,Te1/5,1/1/2,10G,fiber,Po20,switch
+Cisco IOS-XE Software
+hostname CORE1
+Model number: C9500
+Management Address: 10.0.0.1
+Stack member 1
+-- show running-config --
+hostname CORE1
+ip routing
+ip dhcp pool USERS
+-- show lldp neighbors detail --
+Local Port: Te1/1
+Neighbor: CORE2
+Neighbor Port: Te1/1
+Type: switch
+Speed: 40G
+Media: stacking
+Trunk: stack
+
+Local Port: Te1/2
+Neighbor: DIST1
+Neighbor Port: 1/1/1
+Type: switch
+Speed: 10G
+Media: fiber
+Trunk: Po10
+
+Local Port: Te1/3
+Neighbor: DIST1
+Neighbor Port: 1/1/2
+Type: switch
+Speed: 10G
+Media: fiber
+Trunk: Po10
+
+Local Port: Te1/4
+Neighbor: DIST2
+Neighbor Port: 1/1/1
+Type: switch
+Speed: 10G
+Media: fiber
+Trunk: Po20
+
+Local Port: Te1/5
+Neighbor: DIST2
+Neighbor Port: 1/1/2
+Type: switch
+Speed: 10G
+Media: fiber
+Trunk: Po20
+
+Local Port: Te1/10
+Neighbor: FW-A
+Neighbor Port: port1
+Type: firewall
+Speed: 10G
+Media: fiber
+Trunk: normal
+
+Local Port: Te1/11
+Neighbor: FW-B
+Neighbor Port: port1
+Type: firewall
+Speed: 10G
+Media: fiber
+Trunk: normal
+
+-- show spanning-tree --
+This bridge is the root
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254
+-- show ip dhcp pool --
+Pool USERS 10.10.10.0/24

@@ -1,7 +1,16 @@
-HOSTNAME: ACCESS2
-VENDOR: Cisco
-MODEL: 2960
-DEVICE_TYPE: switch
-MGMT_IP: 10.0.3.2
-VLAN: 10 Users
-VLAN: 20 Voice
+Cisco IOS Software
+hostname ACCESS2
+Model number: 2960
+Management Address: 10.0.3.2
+-- show running-config --
+hostname ACCESS2
+ip routing
+-- show lldp neighbors detail --
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

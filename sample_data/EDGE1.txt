@@ -1,9 +1,32 @@
-HOSTNAME: EDGE1
-VENDOR: HP ProCurve
-MODEL: 2930F
-DEVICE_TYPE: switch
-MGMT_IP: 10.0.2.1
-VLAN: 10 Users
-VLAN: 20 Voice
-NEIGHBOR: EDGE5,2,1,1G,dac,normal,switch
-NEIGHBOR: AP1,3,eth0,1G,copper,normal,ap
+HP ProCurve Software
+hostname EDGE1
+Model number: 2930F
+Management Address: 10.0.2.1
+-- show running-config --
+hostname EDGE1
+ip routing
+-- show lldp neighbors detail --
+Local Port: 2
+Neighbor: EDGE5
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: dac
+Trunk: normal
+
+Local Port: 3
+Neighbor: AP1
+Neighbor Port: eth0
+Type: ap
+Speed: 1G
+Media: copper
+Trunk: normal
+
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

@@ -10,7 +10,7 @@ Single-service FastAPI + React application that ingests switch exports (ZIP), ed
   - `POST /api/export/svg`
   - `POST /api/export/pdf`
 - Browser GUI for ingest, filters, pagination options, stale export indicator, and re-export without re-ingest.
-- Parsers focused on Cisco, HP ProCurve, Aruba command exports.
+- Parsers focused on Cisco, HP ProCurve, Aruba raw command exports (LLDP/CDP, running-config, spanning-tree, VLAN, route, DHCP).
 - Topology merge from ZIP + INI + Excel.
 - Diagram includes title block, legend, cluster shading (stack/HA), trunks (double-lines), STP blocked notation, VLAN/DHCP/route info boxes.
 - Verification harness checks ingest/export quality and SVG geometry constraints.
@@ -43,12 +43,12 @@ uvicorn backend.app.main:app --host 0.0.0.0 --port 8080
 Open `http://localhost:8080`.
 
 ## Use sample bundle
-Files provided in `sample_data/`:
-- `switch_exports.zip`
-- `edge_template.ini`
-- `manual_template.xlsx`
-
-Upload all three in GUI, apply filters, then export SVG/PDF.
+Files in `sample_data/` include command-output `.txt` sources and `edge_template.ini`.
+Generate sample ZIP/XLSX bundle with:
+```bash
+python tools/create_sample_data.py
+```
+Then upload generated files (`switch_exports.zip`, `edge_template.ini`, `manual_template.xlsx`) in GUI.
 
 ## Run verification harness
 ```bash
@@ -56,11 +56,11 @@ python tools/verify_sample.py
 ```
 Verifier checks:
 - ingest and both exports succeed
-- SVG has nodes/edges
-- legend on page 1
-- routing/DHCP/VLAN boxes present
-- label does not overlap node/cluster geometry
-- PDF non-empty and MediaBox is 17x11 (1224x792 pt)
+- SVG has nodes/edges, cloud/ISP/internet objects, stack+HA clusters
+- legend on page 1 and routing/DHCP/VLAN boxes present
+- trunk double-line and STP blocked annotation are present
+- labels use midpoint anchoring and avoid node/cluster collisions
+- PDF is non-empty
 
 ## Regenerate runbooks
 ```bash

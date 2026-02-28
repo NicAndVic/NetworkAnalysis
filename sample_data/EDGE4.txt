@@ -1,8 +1,24 @@
-HOSTNAME: EDGE4
-VENDOR: Cisco
-MODEL: 9200
-DEVICE_TYPE: switch
-MGMT_IP: 10.0.2.4
-VLAN: 10 Users
-VLAN: 20 Voice
-NEIGHBOR: AP4,3,eth0,1G,copper,normal,ap
+Cisco IOS Software
+hostname EDGE4
+Model number: 9200
+Management Address: 10.0.2.4
+-- show running-config --
+hostname EDGE4
+ip routing
+-- show lldp neighbors detail --
+Local Port: 3
+Neighbor: AP4
+Neighbor Port: eth0
+Type: ap
+Speed: 1G
+Media: copper
+Trunk: normal
+
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254
