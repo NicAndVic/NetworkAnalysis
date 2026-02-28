@@ -1,0 +1,9 @@
+HOSTNAME: EDGE1
+VENDOR: HP ProCurve
+MODEL: 2930F
+DEVICE_TYPE: switch
+MGMT_IP: 10.0.2.1
+VLAN: 10 Users
+VLAN: 20 Voice
+NEIGHBOR: EDGE5,2,1,1G,dac,normal,switch
+NEIGHBOR: AP1,3,eth0,1G,copper,normal,ap

@@ -1,0 +1,10 @@
+HOSTNAME: DIST2
+VENDOR: Aruba
+MODEL: 6300
+DEVICE_TYPE: switch
+MGMT_IP: 10.0.1.2
+VLAN: 10 Users
+VLAN: 20 Voice
+NEIGHBOR: EDGE3,1/1/5,1,1G,copper,normal,switch
+NEIGHBOR: EDGE4,1/1/6,1,1G,copper,normal,switch
+NEIGHBOR: ACCESS2,1/1/7,1,1G,copper,normal,switch

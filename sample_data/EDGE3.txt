@@ -1,0 +1,8 @@
+HOSTNAME: EDGE3
+VENDOR: Cisco
+MODEL: 9200
+DEVICE_TYPE: switch
+MGMT_IP: 10.0.2.3
+VLAN: 10 Users
+VLAN: 20 Voice
+NEIGHBOR: AP3,3,eth0,1G,copper,normal,ap
