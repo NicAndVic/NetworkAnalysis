@@ -4,6 +4,9 @@ __pycache__/
 sample_data/manual_template.xlsx
 sample_data/switch_exports.zip
 sample_data/generated/verify.pdf
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
 samples/sample_manual.xlsx
 samples/sample_bundle.zip
 samples/generated/verify.pdf
+=======
+>>>>>>> main

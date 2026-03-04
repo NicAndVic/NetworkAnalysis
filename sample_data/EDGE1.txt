@@ -5,19 +5,33 @@ Management Address: 10.0.2.1
 -- show running-config --
 hostname EDGE1
 ip routing
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
 -- show lldp info remote-device detail --
 Local Port: 2
 System Name: EDGE5
 Port Id: 1
 System Description: switch
+=======
+-- show lldp neighbors detail --
+Local Port: 2
+Neighbor: EDGE5
+Neighbor Port: 1
+Type: switch
+>>>>>>> main
 Speed: 1G
 Media: dac
 Trunk: normal
 
 Local Port: 3
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
 System Name: AP1
 Port Id: eth0
 System Description: ap
+=======
+Neighbor: AP1
+Neighbor Port: eth0
+Type: ap
+>>>>>>> main
 Speed: 1G
 Media: copper
 Trunk: normal

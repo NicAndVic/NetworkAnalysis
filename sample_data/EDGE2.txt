@@ -10,6 +10,11 @@ Local Port: 2
 System Name: EDGE6
 Port Id: 1
 System Description: switch
+-- show lldp neighbors detail --
+Local Port: 2
+Neighbor: EDGE6
+Neighbor Port: 1
+Type: switch
 Speed: 1G
 Media: dac
 Trunk: normal
@@ -18,6 +23,9 @@ Local Port: 3
 System Name: AP2
 Port Id: eth0
 System Description: ap
+Neighbor: AP2
+Neighbor Port: eth0
+Type: ap
 Speed: 1G
 Media: copper
 Trunk: normal
