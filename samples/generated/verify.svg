@@ -1,241 +1,240 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2944" height="1100" viewBox="0 0 2944 1100">
+<svg xmlns="http://www.w3.org/2000/svg" width="2870.0" height="942.0" viewBox="0 0 2870.0 942.0">
 <rect x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
-<rect class="cluster" x="528" y="584" width="444" height="116" fill="#eef2ff" stroke="#94a3b8" stroke-dasharray="6,2"/>
-<rect class="cluster" x="64" y="454" width="444" height="116" fill="#fee2e2" stroke="#94a3b8" stroke-dasharray="6,2"/>
-<line class="edge" data-edge-id="e0" x1="776" y1="642.0" x2="724" y2="642.0" style="stroke:#9333ea;stroke-width:2;fill:none;stroke-dasharray:1,4"/>
-<text class="edge-label" data-edge-id="e0" x="750.0" y="578.0" text-anchor="middle" font-size="11" fill="#111827">40G/stacking</text>
-<line class="edge trunk" data-edge-id="e1" x1="724.0" y1="639.5" x2="1008.0" y2="639.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<line class="edge trunk" data-edge-id="e1" x1="724.0" y1="644.5" x2="1008.0" y2="644.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e1" x="866.0" y="578.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber po10 (2)</text>
-<line class="edge trunk" data-edge-id="e2" x1="724.0" y1="639.5" x2="1240.0" y2="639.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<line class="edge trunk" data-edge-id="e2" x1="724.0" y1="644.5" x2="1240.0" y2="644.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e2" x="982.0" y="578.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber po20 (2)</text>
-<line class="edge" data-edge-id="e3" x1="544" y1="642.0" x2="260" y2="512.0" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e3" x="402.0" y="593.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge trunk" data-edge-id="e4" x1="956.0" y1="639.5" x2="1008.0" y2="639.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<line class="edge trunk" data-edge-id="e4" x1="956.0" y1="644.5" x2="1008.0" y2="644.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e4" x="982.0" y="714.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber po11 (2)</text>
-<line class="edge trunk" data-edge-id="e5" x1="956.0" y1="639.5" x2="1240.0" y2="639.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<line class="edge trunk" data-edge-id="e5" x1="956.0" y1="644.5" x2="1240.0" y2="644.5" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e5" x="1098.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber po21 (2)</text>
-<line class="edge" data-edge-id="e6" x1="776" y1="642.0" x2="492" y2="512.0" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e6" x="634.0" y="569.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge" data-edge-id="e7" x1="1188" y1="642.0" x2="1472" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e7" x="1330.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e8" x1="1188" y1="642.0" x2="1704" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3;stroke-dasharray:2,2;stroke-width:3"/>
-<text class="edge-label" data-edge-id="e8" x="1446.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper STP blocked</text>
-<line class="edge" data-edge-id="e9" x1="1008" y1="642.0" x2="260" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e9" x="634.0" y="714.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e10" x1="1420" y1="642.0" x2="1936" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e10" x="1678.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e11" x1="1420" y1="642.0" x2="2168" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e11" x="1794.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e12" x1="1240" y1="642.0" x2="492" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e12" x="866.0" y="714.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e13" x1="1652" y1="642.0" x2="2400" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:2,2"/>
-<text class="edge-label" data-edge-id="e13" x="2026.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">1G/dac</text>
-<line class="edge" data-edge-id="e14" x1="1472" y1="642.0" x2="220" y2="762.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e14" x="846.0" y="728.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e15" x1="1884" y1="642.0" x2="2632" y2="642.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:2,2"/>
-<text class="edge-label" data-edge-id="e15" x="2258.0" y="590.0" text-anchor="middle" font-size="11" fill="#111827">1G/dac</text>
-<line class="edge" data-edge-id="e16" x1="1704" y1="642.0" x2="412" y2="762.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e16" x="1058.0" y="694.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e17" x1="1936" y1="642.0" x2="604" y2="762.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e17" x="1270.0" y="694.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e18" x1="2168" y1="642.0" x2="796" y2="762.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e18" x="1482.0" y="694.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e19" x1="260" y1="512.0" x2="312" y2="512.0" style="stroke:#16a34a;stroke-width:2;fill:none;stroke-dasharray:1,4"/>
-<text class="edge-label" data-edge-id="e19" x="286.0" y="448.0" text-anchor="middle" font-size="11" fill="#111827">10G/stacking</text>
-<line class="edge" data-edge-id="e20" x1="145.0" y1="286" x2="170.0" y2="340" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e20" x="157.5" y="305.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge" data-edge-id="e21" x1="170.0" y1="424" x2="170.0" y2="470" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e21" x="170.0" y="439.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge" data-edge-id="e22" x1="260" y1="382.0" x2="312" y2="512.0" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e22" x="358.0" y="439.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge" data-edge-id="e23" x1="210" y1="248.0" x2="312" y2="382.0" style="stroke:#2563eb;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e23" x="261.0" y="307.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
-<line class="edge" data-edge-id="e24" x1="312" y1="382.0" x2="260" y2="512.0" style="stroke:#2563eb;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e24" x="286.0" y="429.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
-<line class="edge" data-edge-id="e25" x1="402.0" y1="424" x2="402.0" y2="470" style="stroke:#2563eb;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e25" x="420.0" y="439.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
-<line class="edge" data-edge-id="e26" x1="145.0" y1="156" x2="145.0" y2="210" style="stroke:#2563eb;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e26" x="145.0" y="175.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
-<line class="edge" data-edge-id="e27" x1="262" y1="118.0" x2="210" y2="248.0" style="stroke:#2563eb;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e27" x="236.0" y="175.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
-<line class="edge" data-edge-id="e28" x1="444" y1="118.0" x2="210" y2="248.0" style="stroke:#2563eb;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e28" x="327.0" y="175.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
-<line class="edge" data-edge-id="e29" x1="544" y1="642.0" x2="492" y2="512.0" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e29" x="544.0" y="569.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge" data-edge-id="e30" x1="776" y1="642.0" x2="260" y2="512.0" style="stroke:#16a34a;stroke-width:2;fill:none"/>
-<text class="edge-label" data-edge-id="e30" x="492.0" y="593.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
-<line class="edge" data-edge-id="e31" x1="2400" y1="642.0" x2="1028" y2="772.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e31" x="1714.0" y="699.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<line class="edge" data-edge-id="e32" x1="2632" y1="642.0" x2="1260" y2="772.0" style="stroke:#2563eb;stroke-width:2;fill:none;stroke-dasharray:6,3"/>
-<text class="edge-label" data-edge-id="e32" x="1946.0" y="699.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
-<rect class="node" id="node-ACCESS1" x="80" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="170.0" y="617" text-anchor="middle" font-size="12" font-weight="700">ACCESS1</text>
-<text x="170.0" y="633" text-anchor="middle" font-size="10">switch 2960</text>
-<text x="170.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.3.1 10.10.10.0</text>
-<text x="170.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-ACCESS2" x="312" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="402.0" y="617" text-anchor="middle" font-size="12" font-weight="700">ACCESS2</text>
-<text x="402.0" y="633" text-anchor="middle" font-size="10">switch 2960</text>
-<text x="402.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.3.2 10.10.10.0</text>
-<text x="402.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-CORE1" x="544" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="634.0" y="617" text-anchor="middle" font-size="12" font-weight="700">CORE1</text>
-<text x="634.0" y="633" text-anchor="middle" font-size="10">switch C9500</text>
-<text x="634.0" y="648" text-anchor="middle" font-size="10">10.0.0.1 10.0.0.254 10.10.10.0</text>
-<text x="634.0" y="663" text-anchor="middle" font-size="9">Role: DHCPSTP root</text>
-<rect class="node" id="node-CORE2" x="776" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="866.0" y="617" text-anchor="middle" font-size="12" font-weight="700">CORE2</text>
-<text x="866.0" y="633" text-anchor="middle" font-size="10">switch C9500</text>
-<text x="866.0" y="648" text-anchor="middle" font-size="10">10.0.0.2 10.0.0.254 10.10.10.0</text>
-<text x="866.0" y="663" text-anchor="middle" font-size="9">Role: DHCPSTP root</text>
-<rect class="node" id="node-DIST1" x="1008" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="1098.0" y="617" text-anchor="middle" font-size="12" font-weight="700">DIST1</text>
-<text x="1098.0" y="633" text-anchor="middle" font-size="10">switch </text>
-<text x="1098.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.1.1 10.10.10.0</text>
-<text x="1098.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-DIST2" x="1240" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="1330.0" y="617" text-anchor="middle" font-size="12" font-weight="700">DIST2</text>
-<text x="1330.0" y="633" text-anchor="middle" font-size="10">switch </text>
-<text x="1330.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.1.2 10.10.10.0</text>
-<text x="1330.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-EDGE1" x="1472" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="1562.0" y="617" text-anchor="middle" font-size="12" font-weight="700">EDGE1</text>
-<text x="1562.0" y="633" text-anchor="middle" font-size="10">switch </text>
-<text x="1562.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.2.1 10.10.10.0</text>
-<text x="1562.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-EDGE2" x="1704" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="1794.0" y="617" text-anchor="middle" font-size="12" font-weight="700">EDGE2</text>
-<text x="1794.0" y="633" text-anchor="middle" font-size="10">switch </text>
-<text x="1794.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.2.2 10.10.10.0</text>
-<text x="1794.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-EDGE3" x="1936" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="2026.0" y="617" text-anchor="middle" font-size="12" font-weight="700">EDGE3</text>
-<text x="2026.0" y="633" text-anchor="middle" font-size="10">switch 9200</text>
-<text x="2026.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.2.3 10.10.10.0</text>
-<text x="2026.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-EDGE4" x="2168" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="2258.0" y="617" text-anchor="middle" font-size="12" font-weight="700">EDGE4</text>
-<text x="2258.0" y="633" text-anchor="middle" font-size="10">switch 9200</text>
-<text x="2258.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.2.4 10.10.10.0</text>
-<text x="2258.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-EDGE5" x="2400" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="2490.0" y="617" text-anchor="middle" font-size="12" font-weight="700">EDGE5</text>
-<text x="2490.0" y="633" text-anchor="middle" font-size="10">switch </text>
-<text x="2490.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.2.5 10.10.10.0</text>
-<text x="2490.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-EDGE6" x="2632" y="600" width="180" height="84" rx="8" ry="8" fill="#f8fafc" stroke="#1f2937"/>
-<text x="2722.0" y="617" text-anchor="middle" font-size="12" font-weight="700">EDGE6</text>
-<text x="2722.0" y="633" text-anchor="middle" font-size="10">switch </text>
-<text x="2722.0" y="648" text-anchor="middle" font-size="10">10.0.0.254 10.0.2.6 10.10.10.0</text>
-<text x="2722.0" y="663" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-FW-A" x="80" y="470" width="180" height="84" rx="8" ry="8" fill="#fee2e2" stroke="#1f2937"/>
-<text x="170.0" y="487" text-anchor="middle" font-size="12" font-weight="700">FW-A</text>
-<text x="170.0" y="503" text-anchor="middle" font-size="10">firewall Fortigate-200F</text>
-<text x="170.0" y="518" text-anchor="middle" font-size="10"></text>
-<text x="170.0" y="533" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-FW-B" x="312" y="470" width="180" height="84" rx="8" ry="8" fill="#fee2e2" stroke="#1f2937"/>
-<text x="402.0" y="487" text-anchor="middle" font-size="12" font-weight="700">FW-B</text>
-<text x="402.0" y="503" text-anchor="middle" font-size="10">firewall Fortigate-200F</text>
-<text x="402.0" y="518" text-anchor="middle" font-size="10"></text>
-<text x="402.0" y="533" text-anchor="middle" font-size="9"></text>
-<ellipse class="node internet" id="node-Internet" cx="145.0" cy="248.0" rx="65.0" ry="38.0" fill="#e0f2fe" stroke="#0369a1"/>
-<text x="145.0" y="227" text-anchor="middle" font-size="12" font-weight="700">Internet</text>
-<text x="145.0" y="243" text-anchor="middle" font-size="10">internet Cloud</text>
-<text x="145.0" y="258" text-anchor="middle" font-size="10"></text>
-<text x="145.0" y="273" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-ISP:ISP-A" x="80" y="340" width="180" height="84" rx="8" ry="8" fill="#fef3c7" stroke="#1f2937"/>
-<text x="170.0" y="357" text-anchor="middle" font-size="12" font-weight="700">ISP-A</text>
-<text x="170.0" y="373" text-anchor="middle" font-size="10">isp CIR-100</text>
-<text x="170.0" y="388" text-anchor="middle" font-size="10"></text>
-<text x="170.0" y="403" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-ISP:ISP-B" x="312" y="340" width="180" height="84" rx="8" ry="8" fill="#fef3c7" stroke="#1f2937"/>
-<text x="402.0" y="357" text-anchor="middle" font-size="12" font-weight="700">ISP-B</text>
-<text x="402.0" y="373" text-anchor="middle" font-size="10">isp CIR-200</text>
-<text x="402.0" y="388" text-anchor="middle" font-size="10"></text>
-<text x="402.0" y="403" text-anchor="middle" font-size="9"></text>
-<polygon class="node cloud" id="node-CLOUD:AWS-Prod" points="145.0,80 210,118.0 145.0,156 80,118.0" fill="#e2e8f0" stroke="#334155"/>
-<text x="145.0" y="97" text-anchor="middle" font-size="12" font-weight="700">AWS-Prod</text>
-<text x="145.0" y="113" text-anchor="middle" font-size="10">cloud AWS</text>
-<text x="145.0" y="128" text-anchor="middle" font-size="10"></text>
-<text x="145.0" y="143" text-anchor="middle" font-size="9"></text>
-<polygon class="node cloud" id="node-CLOUD:Azure-DR" points="327.0,80 392,156 262,156" fill="#e2e8f0" stroke="#334155"/>
-<text x="327.0" y="97" text-anchor="middle" font-size="12" font-weight="700">Azure-DR</text>
-<text x="327.0" y="113" text-anchor="middle" font-size="10">cloud Azure</text>
-<text x="327.0" y="128" text-anchor="middle" font-size="10"></text>
-<text x="327.0" y="143" text-anchor="middle" font-size="9"></text>
-<polygon class="node cloud" id="node-CLOUD:Other-SaaS" points="470.0,80 548.0,80 574,118.0 548.0,156 470.0,156 444,118.0" fill="#e2e8f0" stroke="#334155"/>
-<text x="509.0" y="97" text-anchor="middle" font-size="12" font-weight="700">Other-SaaS</text>
-<text x="509.0" y="113" text-anchor="middle" font-size="10">cloud Other</text>
-<text x="509.0" y="128" text-anchor="middle" font-size="10"></text>
-<text x="509.0" y="143" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-SRV1" x="848" y="730" width="180" height="84" rx="8" ry="8" fill="#dcfce7" stroke="#1f2937"/>
-<text x="938.0" y="747" text-anchor="middle" font-size="12" font-weight="700">SRV1</text>
-<text x="938.0" y="763" text-anchor="middle" font-size="10">server Linux</text>
-<text x="938.0" y="778" text-anchor="middle" font-size="10">10.0.10.11</text>
-<text x="938.0" y="793" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-SRV2" x="1080" y="730" width="180" height="84" rx="8" ry="8" fill="#dcfce7" stroke="#1f2937"/>
-<text x="1170.0" y="747" text-anchor="middle" font-size="12" font-weight="700">SRV2</text>
-<text x="1170.0" y="763" text-anchor="middle" font-size="10">server Windows</text>
-<text x="1170.0" y="778" text-anchor="middle" font-size="10">10.0.10.12</text>
-<text x="1170.0" y="793" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-AP1" x="80" y="730" width="140" height="64" rx="8" ry="8" fill="#ede9fe" stroke="#1f2937"/>
-<text x="150.0" y="747" text-anchor="middle" font-size="12" font-weight="700">AP1</text>
-<text x="150.0" y="763" text-anchor="middle" font-size="10">ap Ubiquiti U6</text>
-<text x="150.0" y="778" text-anchor="middle" font-size="10">10.0.20.11</text>
-<text x="150.0" y="793" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-AP2" x="272" y="730" width="140" height="64" rx="8" ry="8" fill="#ede9fe" stroke="#1f2937"/>
-<text x="342.0" y="747" text-anchor="middle" font-size="12" font-weight="700">AP2</text>
-<text x="342.0" y="763" text-anchor="middle" font-size="10">ap Ubiquiti U6</text>
-<text x="342.0" y="778" text-anchor="middle" font-size="10">10.0.20.12</text>
-<text x="342.0" y="793" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-AP3" x="464" y="730" width="140" height="64" rx="8" ry="8" fill="#ede9fe" stroke="#1f2937"/>
-<text x="534.0" y="747" text-anchor="middle" font-size="12" font-weight="700">AP3</text>
-<text x="534.0" y="763" text-anchor="middle" font-size="10">ap Aruba AP</text>
-<text x="534.0" y="778" text-anchor="middle" font-size="10">10.0.20.13</text>
-<text x="534.0" y="793" text-anchor="middle" font-size="9"></text>
-<rect class="node" id="node-AP4" x="656" y="730" width="140" height="64" rx="8" ry="8" fill="#ede9fe" stroke="#1f2937"/>
-<text x="726.0" y="747" text-anchor="middle" font-size="12" font-weight="700">AP4</text>
-<text x="726.0" y="763" text-anchor="middle" font-size="10">ap Aruba AP</text>
-<text x="726.0" y="778" text-anchor="middle" font-size="10">10.0.20.14</text>
-<text x="726.0" y="793" text-anchor="middle" font-size="9"></text>
-<rect class="legend" x="24" y="638" width="530" height="126" fill="#fffbeb" stroke="#a16207"/>
+<rect class="cluster stack" x="502.0" y="504.0" width="448.0" height="122.0" fill="#e0e7ff" stroke="#64748b" stroke-dasharray="5,3"/>
+<rect class="cluster ha" x="42.0" y="379.0" width="448.0" height="122.0" fill="#ffe4e6" stroke="#64748b" stroke-dasharray="5,3"/>
+<polyline class="edge trunk" data-edge-id="e0" data-src="CORE1" data-dst="CORE2" data-link-type="trunk" data-media="fiber" data-members="4" data-direct="0" points="702.0,567.0 716.0,567.0 716.0,498.5 736.0,498.5 736.0,567.0 750.0,567.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<polyline class="edge trunk" data-edge-id="e0" data-src="CORE1" data-dst="CORE2" data-link-type="trunk" data-media="fiber" data-members="4" data-direct="0" points="702.0,563.0 716.0,563.0 716.0,494.5 736.0,494.5 736.0,563.0 750.0,563.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e0" data-seg="716.0,496.5,736.0,496.5" x="726.0" y="496.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber Po1 members=4</text>
+<polyline class="edge" data-edge-id="e1" data-src="DIST1" data-dst="CORE1" data-link-type="normal" data-media="fiber" data-members="1" data-direct="0" points="980.0,565.0 966.0,565.0 966.0,499.5 716.0,499.5 716.0,565.0 702.0,565.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e1" data-seg="966.0,499.5,716.0,499.5" x="841.0" y="499.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e2" data-src="DIST2" data-dst="CORE1" data-link-type="normal" data-media="fiber" data-members="1" data-direct="0" points="1210.0,565.0 1196.0,565.0 1196.0,502.5 716.0,502.5 716.0,565.0 702.0,565.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e2" data-seg="1196.0,502.5,716.0,502.5" x="956.0" y="500.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e3" data-src="DIST1" data-dst="CORE2" data-link-type="normal" data-media="fiber" data-members="1" data-direct="0" points="980.0,565.0 966.0,565.0 966.0,505.5 946.0,505.5 946.0,565.0 932.0,565.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e3" data-seg="966.0,505.5,946.0,505.5" x="956.0" y="501.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e4" data-src="DIST2" data-dst="CORE2" data-link-type="normal" data-media="fiber" data-members="1" data-direct="0" points="1210.0,565.0 1196.0,565.0 1196.0,508.5 946.0,508.5 946.0,565.0 932.0,565.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e4" data-seg="1196.0,508.5,946.0,508.5" x="1071.0" y="508.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e5" data-src="EDGE1" data-dst="DIST1" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="1440.0,565.0 1426.0,565.0 1426.0,496.5 1176.0,496.5 1176.0,565.0 1162.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e5" data-seg="1426.0,496.5,1176.0,496.5" x="1301.0" y="496.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e6" data-src="EDGE2" data-dst="DIST1" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="1670.0,565.0 1656.0,565.0 1656.0,499.5 1176.0,499.5 1176.0,565.0 1162.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e6" data-seg="1656.0,499.5,1176.0,499.5" x="1416.0" y="499.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e7" data-src="DIST1" data-dst="AP-1" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="980.0,565.0 966.0,565.0 966.0,753.0 204.0,753.0 204.0,677.0 190.0,677.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e7" data-seg="966.0,753.0,204.0,753.0" x="585.0" y="753.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e8" data-src="DIST2" data-dst="EDGE3" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="1392.0,565.0 1406.0,565.0 1406.0,502.5 1886.0,502.5 1886.0,565.0 1900.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3;stroke-dasharray:2,2;stroke-width:3"/>
+<text class="edge-label" data-edge-id="e8" data-seg="1406.0,502.5,1886.0,502.5" x="1646.0" y="502.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper STP blocked</text>
+<polyline class="edge" data-edge-id="e9" data-src="EDGE3" data-dst="DIST2" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="1900.0,565.0 1886.0,565.0 1886.0,505.5 1406.0,505.5 1406.0,565.0 1392.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e9" data-seg="1886.0,505.5,1406.0,505.5" x="1646.0" y="505.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e10" data-src="EDGE4" data-dst="DIST2" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2130.0,565.0 2116.0,565.0 2116.0,508.5 1406.0,508.5 1406.0,565.0 1392.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e10" data-seg="2116.0,508.5,1406.0,508.5" x="1761.0" y="508.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e11" data-src="DIST2" data-dst="AP-2" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="1210.0,565.0 1196.0,565.0 1196.0,756.0 382.0,756.0 382.0,677.0 368.0,677.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e11" data-seg="1196.0,756.0,382.0,756.0" x="789.0" y="756.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e12" data-src="ACCESS1" data-dst="EDGE1" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="242.0,565.0 256.0,565.0 256.0,502.5 1426.0,502.5 1426.0,565.0 1440.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e12" data-seg="256.0,502.5,1426.0,502.5" x="841.0" y="500.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e13" data-src="ACCESS2" data-dst="EDGE2" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="472.0,565.0 486.0,565.0 486.0,502.5 1656.0,502.5 1656.0,565.0 1670.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e13" data-seg="486.0,502.5,1656.0,502.5" x="1071.0" y="502.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e14" data-src="EDGE5" data-dst="EDGE3" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2360.0,565.0 2346.0,565.0 2346.0,496.5 2096.0,496.5 2096.0,565.0 2082.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e14" data-seg="2346.0,496.5,2096.0,496.5" x="2221.0" y="496.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e15" data-src="EDGE6" data-dst="EDGE4" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2590.0,565.0 2576.0,565.0 2576.0,499.5 2326.0,499.5 2326.0,565.0 2312.0,565.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e15" data-seg="2576.0,499.5,2326.0,499.5" x="2451.0" y="499.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e16" data-src="EDGE5" data-dst="SERVER1" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2360.0,565.0 2346.0,565.0 2346.0,621.5 968.0,621.5 968.0,690.0 954.0,690.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e16" data-seg="2346.0,621.5,968.0,621.5" x="1657.0" y="621.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e17" data-src="EDGE5" data-dst="AP-3" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2360.0,565.0 2346.0,565.0 2346.0,759.0 560.0,759.0 560.0,677.0 546.0,677.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e17" data-seg="2346.0,759.0,560.0,759.0" x="1453.0" y="759.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e18" data-src="EDGE6" data-dst="SERVER2" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2590.0,565.0 2576.0,565.0 2576.0,624.5 1198.0,624.5 1198.0,690.0 1184.0,690.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e18" data-seg="2576.0,624.5,1198.0,624.5" x="1887.0" y="624.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e19" data-src="EDGE6" data-dst="AP-4" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2590.0,565.0 2576.0,565.0 2576.0,627.5 738.0,627.5 738.0,677.0 724.0,677.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e19" data-seg="2576.0,627.5,738.0,627.5" x="1657.0" y="627.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e20" data-src="FW-A" data-dst="FW-B" data-link-type="ha-sync" data-media="stacking" data-members="1" data-direct="1" points="242.0,440.0 290.0,440.0" style="stroke:#16a34a;stroke-width:2.2;fill:none;stroke-dasharray:1,5"/>
+<text class="edge-label" data-edge-id="e20" data-seg="242.0,440.0,290.0,440.0" x="266.0" y="368.0" text-anchor="middle" font-size="11" fill="#111827">10G/stacking</text>
+<polyline class="edge" data-edge-id="e21" data-src="Internet" data-dst="ISP:PrimaryISP" data-link-type="internet-uplink" data-media="fiber" data-members="1" data-direct="0" points="208.0,214.0 222.0,214.0 222.0,262.5 242.0,262.5 242.0,323.0 256.0,323.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e21" data-seg="222.0,262.5,242.0,262.5" x="232.0" y="262.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e22" data-src="ISP:PrimaryISP" data-dst="FW-A" data-link-type="wan" data-media="fiber" data-members="1" data-direct="0" points="256.0,323.0 242.0,323.0 242.0,371.5 256.0,371.5 256.0,440.0 242.0,440.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e22" data-seg="242.0,371.5,256.0,371.5" x="249.0" y="371.5" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e23" data-src="ISP:PrimaryISP" data-dst="FW-B" data-link-type="wan" data-media="fiber" data-members="1" data-direct="0" points="330.0,358.0 330.0,372.0 386.0,372.0 386.0,383.0 381.0,383.0 381.0,397.0" style="stroke:#16a34a;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e23" data-seg="330.0,372.0,386.0,372.0" x="358.0" y="372.0" text-anchor="middle" font-size="11" fill="#111827">10G/fiber</text>
+<polyline class="edge" data-edge-id="e24" data-src="Internet" data-dst="ISP:BackupISP" data-link-type="internet-uplink" data-media="copper" data-members="1" data-direct="0" points="134.0,249.0 134.0,263.0 30.0,263.0 30.0,274.0 134.0,274.0 134.0,288.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e24" data-seg="134.0,263.0,30.0,263.0" x="82.0" y="263.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e25" data-src="ISP:BackupISP" data-dst="FW-A" data-link-type="wan" data-media="copper" data-members="1" data-direct="0" points="134.0,358.0 134.0,372.0 208.0,372.0 208.0,383.0 151.0,383.0 151.0,397.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e25" data-seg="134.0,372.0,208.0,372.0" x="171.0" y="372.0" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e26" data-src="ISP:BackupISP" data-dst="FW-B" data-link-type="wan" data-media="copper" data-members="1" data-direct="0" points="208.0,323.0 222.0,323.0 222.0,374.5 276.0,374.5 276.0,440.0 290.0,440.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e26" data-seg="222.0,374.5,276.0,374.5" x="249.0" y="374.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e27" data-src="CLOUD:AWS-Prod" data-dst="Internet" data-link-type="cloud-via-internet" data-media="fiber" data-members="1" data-direct="0" points="134.0,140.0 134.0,154.0 33.0,154.0 33.0,165.0 134.0,165.0 134.0,179.0" style="stroke:#2563eb;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e27" data-seg="134.0,154.0,33.0,154.0" x="83.5" y="154.0" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
+<polyline class="edge" data-edge-id="e28" data-src="CLOUD:Azure-DR" data-dst="Internet" data-link-type="cloud-via-internet" data-media="fiber" data-members="1" data-direct="0" points="256.0,105.0 242.0,105.0 242.0,153.5 222.0,153.5 222.0,214.0 208.0,214.0" style="stroke:#2563eb;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e28" data-seg="242.0,153.5,222.0,153.5" x="232.0" y="153.5" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
+<polyline class="edge" data-edge-id="e29" data-src="CLOUD:Other-SaaS" data-dst="Internet" data-link-type="cloud-via-internet" data-media="fiber" data-members="1" data-direct="0" points="452.0,105.0 438.0,105.0 438.0,156.5 222.0,156.5 222.0,214.0 208.0,214.0" style="stroke:#2563eb;stroke-width:2.2;fill:none"/>
+<text class="edge-label" data-edge-id="e29" data-seg="438.0,156.5,222.0,156.5" x="330.0" y="156.5" text-anchor="middle" font-size="11" fill="#111827">1G/fiber</text>
+<polyline class="edge" data-edge-id="e30" data-src="EDGE5" data-dst="SERVER1" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2360.0,565.0 2346.0,565.0 2346.0,630.5 968.0,630.5 968.0,690.0 954.0,690.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e30" data-seg="2346.0,630.5,968.0,630.5" x="1657.0" y="630.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<polyline class="edge" data-edge-id="e31" data-src="EDGE6" data-dst="SERVER2" data-link-type="normal" data-media="copper" data-members="1" data-direct="0" points="2590.0,565.0 2576.0,565.0 2576.0,633.5 1198.0,633.5 1198.0,690.0 1184.0,690.0" style="stroke:#2563eb;stroke-width:2.2;fill:none;stroke-dasharray:6,3"/>
+<text class="edge-label" data-edge-id="e31" data-seg="2576.0,633.5,1198.0,633.5" x="1887.0" y="633.5" text-anchor="middle" font-size="11" fill="#111827">1G/copper</text>
+<rect class="node switch" x="520.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="611.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">CORE1</text>
+<text x="611.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="611.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.0 10.0.0.1</text>
+<text x="611.0" y="588.0" text-anchor="middle" font-size="9">DHCP STP root</text>
+<rect class="node switch" x="750.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="841.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">CORE2</text>
+<text x="841.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="841.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.0 10.0.0.1</text>
+<text x="841.0" y="588.0" text-anchor="middle" font-size="9">DHCP</text>
+<rect class="node switch" x="980.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="1071.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">DIST1</text>
+<text x="1071.0" y="556.0" text-anchor="middle" font-size="10">switch ProCurve</text>
+<text x="1071.0" y="572.0" text-anchor="middle" font-size="9">172.16.10.0</text>
+<text x="1071.0" y="588.0" text-anchor="middle" font-size="9">STP root</text>
+<rect class="node switch" x="1210.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="1301.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">DIST2</text>
+<text x="1301.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="1301.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="1301.0" y="588.0" text-anchor="middle" font-size="9">STP root</text>
+<rect class="node switch" x="1440.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="1531.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">EDGE1</text>
+<text x="1531.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="1531.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="1531.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="1670.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="1761.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">EDGE2</text>
+<text x="1761.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="1761.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="1761.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="1900.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="1991.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">EDGE3</text>
+<text x="1991.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="1991.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="1991.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="2130.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="2221.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">EDGE4</text>
+<text x="2221.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="2221.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="2221.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="2360.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="2451.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">EDGE5</text>
+<text x="2451.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="2451.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="2451.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="2590.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="2681.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">EDGE6</text>
+<text x="2681.0" y="556.0" text-anchor="middle" font-size="10">switch </text>
+<text x="2681.0" y="572.0" text-anchor="middle" font-size="9">10.0.0.2 10.10.0.0</text>
+<text x="2681.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="60.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="151.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">ACCESS1</text>
+<text x="151.0" y="556.0" text-anchor="middle" font-size="10">switch ProCurve</text>
+<text x="151.0" y="572.0" text-anchor="middle" font-size="9">172.16.10.0</text>
+<text x="151.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node switch" x="290.0" y="522.0" width="182" height="86" rx="8" fill="#f8fafc" stroke="#1f2937"/>
+<text x="381.0" y="540.0" text-anchor="middle" font-size="12" font-weight="700">ACCESS2</text>
+<text x="381.0" y="556.0" text-anchor="middle" font-size="10">switch ProCurve</text>
+<text x="381.0" y="572.0" text-anchor="middle" font-size="9">172.16.10.0</text>
+<text x="381.0" y="588.0" text-anchor="middle" font-size="9"></text>
+<rect class="node firewall" x="60.0" y="397.0" width="182" height="86" rx="8" fill="#fee2e2" stroke="#1f2937"/>
+<text x="151.0" y="415.0" text-anchor="middle" font-size="12" font-weight="700">FW-A</text>
+<text x="151.0" y="431.0" text-anchor="middle" font-size="10">firewall PA-3220</text>
+<text x="151.0" y="447.0" text-anchor="middle" font-size="9"></text>
+<text x="151.0" y="463.0" text-anchor="middle" font-size="9"></text>
+<rect class="node firewall" x="290.0" y="397.0" width="182" height="86" rx="8" fill="#fee2e2" stroke="#1f2937"/>
+<text x="381.0" y="415.0" text-anchor="middle" font-size="12" font-weight="700">FW-B</text>
+<text x="381.0" y="431.0" text-anchor="middle" font-size="10">firewall PA-3220</text>
+<text x="381.0" y="447.0" text-anchor="middle" font-size="9"></text>
+<text x="381.0" y="463.0" text-anchor="middle" font-size="9"></text>
+<rect class="node internet" x="60.0" y="179.0" width="148" height="70" rx="8" fill="#e5e7eb" stroke="#1f2937"/>
+<text x="134.0" y="197.0" text-anchor="middle" font-size="12" font-weight="700">Internet</text>
+<text x="134.0" y="213.0" text-anchor="middle" font-size="10">internet Cloud</text>
+<text x="134.0" y="229.0" text-anchor="middle" font-size="9"></text>
+<text x="134.0" y="245.0" text-anchor="middle" font-size="9"></text>
+<rect class="node isp" x="256.0" y="288.0" width="148" height="70" rx="8" fill="#fef3c7" stroke="#1f2937"/>
+<text x="330.0" y="306.0" text-anchor="middle" font-size="12" font-weight="700">PrimaryISP</text>
+<text x="330.0" y="322.0" text-anchor="middle" font-size="10">isp PRI-100</text>
+<text x="330.0" y="338.0" text-anchor="middle" font-size="9"></text>
+<text x="330.0" y="354.0" text-anchor="middle" font-size="9"></text>
+<rect class="node isp" x="60.0" y="288.0" width="148" height="70" rx="8" fill="#fef3c7" stroke="#1f2937"/>
+<text x="134.0" y="306.0" text-anchor="middle" font-size="12" font-weight="700">BackupISP</text>
+<text x="134.0" y="322.0" text-anchor="middle" font-size="10">isp BAK-010</text>
+<text x="134.0" y="338.0" text-anchor="middle" font-size="9"></text>
+<text x="134.0" y="354.0" text-anchor="middle" font-size="9"></text>
+<rect class="node cloud" x="60.0" y="70.0" width="148" height="70" rx="8" fill="#dbeafe" stroke="#1f2937"/>
+<text x="134.0" y="88.0" text-anchor="middle" font-size="12" font-weight="700">AWS-Prod</text>
+<text x="134.0" y="104.0" text-anchor="middle" font-size="10">cloud AWS</text>
+<text x="134.0" y="120.0" text-anchor="middle" font-size="9"></text>
+<text x="134.0" y="136.0" text-anchor="middle" font-size="9"></text>
+<rect class="node cloud" x="256.0" y="70.0" width="148" height="70" rx="8" fill="#dbeafe" stroke="#1f2937"/>
+<text x="330.0" y="88.0" text-anchor="middle" font-size="12" font-weight="700">Azure-DR</text>
+<text x="330.0" y="104.0" text-anchor="middle" font-size="10">cloud Azure</text>
+<text x="330.0" y="120.0" text-anchor="middle" font-size="9"></text>
+<text x="330.0" y="136.0" text-anchor="middle" font-size="9"></text>
+<rect class="node cloud" x="452.0" y="70.0" width="148" height="70" rx="8" fill="#dbeafe" stroke="#1f2937"/>
+<text x="526.0" y="88.0" text-anchor="middle" font-size="12" font-weight="700">Other-SaaS</text>
+<text x="526.0" y="104.0" text-anchor="middle" font-size="10">cloud Other</text>
+<text x="526.0" y="120.0" text-anchor="middle" font-size="9"></text>
+<text x="526.0" y="136.0" text-anchor="middle" font-size="9"></text>
+<rect class="node server" x="772.0" y="647.0" width="182" height="86" rx="8" fill="#dcfce7" stroke="#1f2937"/>
+<text x="863.0" y="665.0" text-anchor="middle" font-size="12" font-weight="700">SERVER1</text>
+<text x="863.0" y="681.0" text-anchor="middle" font-size="10">server Linux</text>
+<text x="863.0" y="697.0" text-anchor="middle" font-size="9">10.10.30.11</text>
+<text x="863.0" y="713.0" text-anchor="middle" font-size="9"></text>
+<rect class="node server" x="1002.0" y="647.0" width="182" height="86" rx="8" fill="#dcfce7" stroke="#1f2937"/>
+<text x="1093.0" y="665.0" text-anchor="middle" font-size="12" font-weight="700">SERVER2</text>
+<text x="1093.0" y="681.0" text-anchor="middle" font-size="10">server Windows</text>
+<text x="1093.0" y="697.0" text-anchor="middle" font-size="9">10.10.30.12</text>
+<text x="1093.0" y="713.0" text-anchor="middle" font-size="9"></text>
+<rect class="node ap" x="60.0" y="647.0" width="130" height="60" rx="8" fill="#ede9fe" stroke="#1f2937"/>
+<text x="125.0" y="665.0" text-anchor="middle" font-size="12" font-weight="700">AP-1</text>
+<text x="125.0" y="681.0" text-anchor="middle" font-size="10">ap Aruba-AP</text>
+<text x="125.0" y="697.0" text-anchor="middle" font-size="9">10.10.40.21</text>
+<text x="125.0" y="713.0" text-anchor="middle" font-size="9"></text>
+<rect class="node ap" x="238.0" y="647.0" width="130" height="60" rx="8" fill="#ede9fe" stroke="#1f2937"/>
+<text x="303.0" y="665.0" text-anchor="middle" font-size="12" font-weight="700">AP-2</text>
+<text x="303.0" y="681.0" text-anchor="middle" font-size="10">ap Aruba-AP</text>
+<text x="303.0" y="697.0" text-anchor="middle" font-size="9">10.10.40.22</text>
+<text x="303.0" y="713.0" text-anchor="middle" font-size="9"></text>
+<rect class="node ap" x="416.0" y="647.0" width="130" height="60" rx="8" fill="#ede9fe" stroke="#1f2937"/>
+<text x="481.0" y="665.0" text-anchor="middle" font-size="12" font-weight="700">AP-3</text>
+<text x="481.0" y="681.0" text-anchor="middle" font-size="10">ap Aruba-AP</text>
+<text x="481.0" y="697.0" text-anchor="middle" font-size="9">10.10.40.23</text>
+<text x="481.0" y="713.0" text-anchor="middle" font-size="9"></text>
+<rect class="node ap" x="594.0" y="647.0" width="130" height="60" rx="8" fill="#ede9fe" stroke="#1f2937"/>
+<text x="659.0" y="665.0" text-anchor="middle" font-size="12" font-weight="700">AP-4</text>
+<text x="659.0" y="681.0" text-anchor="middle" font-size="10">ap Aruba-AP</text>
+<text x="659.0" y="697.0" text-anchor="middle" font-size="9">10.10.40.24</text>
+<text x="659.0" y="713.0" text-anchor="middle" font-size="9"></text>
+<rect class="legend" x="24" y="638" width="560" height="126" fill="#fffbeb" stroke="#a16207"/>
 <text x="34" y="658" font-size="13" font-weight="700">Legend</text>
-<text x="34" y="678" font-size="11">Speed colors: 100M amber, 1G blue, 10G green, 25G teal, 40G purple, 100G red</text>
-<text x="34" y="696" font-size="11">Media styles: fiber solid, copper dashed, DAC dotted, stacking sparse dots</text>
-<text x="34" y="714" font-size="11">Trunk = double-line + Trk/Po id and member count</text>
-<text x="34" y="732" font-size="11">STP blocked = dotted emphasized line + label</text>
-<text x="34" y="750" font-size="11">Shading: firewall/server/AP/stack/HA clusters</text>
-<rect x="2584" y="674" width="336" height="92" fill="#f1f5f9" stroke="#334155"/>
-<text x="2594" y="700" font-size="14" font-weight="700">Network Diagram Generator</text>
-<text x="2594" y="722" font-size="11">Paper: 17x11 inches</text>
-<rect class="info-box" x="2424" y="20" width="490" height="140" fill="#f8fafc" stroke="#64748b"/>
-<text x="2432" y="38" font-size="12" font-weight="700">Routing</text>
-<text x="2432" y="54" font-size="10">ACCESS1: C 10.10.10.0/24 is directly connected</text>
-<text x="2432" y="66" font-size="10">ACCESS1: S 0.0.0.0/0 via 10.0.0.254</text>
-<text x="2432" y="78" font-size="10">ACCESS2: C 10.10.10.0/24 is directly connected</text>
-<text x="2432" y="90" font-size="10">ACCESS2: S 0.0.0.0/0 via 10.0.0.254</text>
-<text x="2432" y="102" font-size="10">CORE1: C 10.10.10.0/24 is directly connected</text>
-<text x="2432" y="114" font-size="10">CORE1: S 0.0.0.0/0 via 10.0.0.254</text>
-<text x="2432" y="126" font-size="10">CORE2: C 10.10.10.0/24 is directly connected</text>
-<text x="2432" y="138" font-size="10">CORE2: S 0.0.0.0/0 via 10.0.0.254</text>
-<rect class="info-box" x="2424" y="170" width="490" height="82" fill="#f8fafc" stroke="#64748b"/>
-<text x="2432" y="188" font-size="12" font-weight="700">DHCP</text>
-<text x="2432" y="204" font-size="10">CORE1: Pool --</text>
-<text x="2432" y="216" font-size="10">CORE1: Pool USERS</text>
-<text x="2432" y="228" font-size="10">CORE2: Pool --</text>
-<text x="2432" y="240" font-size="10">CORE2: Pool USERS</text>
-<rect class="info-box" x="2424" y="262" width="490" height="140" fill="#f8fafc" stroke="#64748b"/>
-<text x="2432" y="280" font-size="12" font-weight="700">VLANs</text>
-<text x="2432" y="296" font-size="10">ACCESS1: VLAN 10 Users</text>
-<text x="2432" y="308" font-size="10">ACCESS1: VLAN 20 Voice</text>
-<text x="2432" y="320" font-size="10">ACCESS1: VLAN 30 Servers</text>
-<text x="2432" y="332" font-size="10">ACCESS2: VLAN 10 Users</text>
-<text x="2432" y="344" font-size="10">ACCESS2: VLAN 20 Voice</text>
-<text x="2432" y="356" font-size="10">ACCESS2: VLAN 30 Servers</text>
-<text x="2432" y="368" font-size="10">CORE1: VLAN 10 Users</text>
-<text x="2432" y="380" font-size="10">CORE1: VLAN 20 Voice</text>
+<text x="34" y="678" font-size="11">Speed→color: 100M amber, 1G blue, 10G green, 25G teal, 40G purple, 100G red</text>
+<text x="34" y="696" font-size="11">Media→style: fiber solid, copper dashed, DAC dotted, stacking sparse dots</text>
+<text x="34" y="714" font-size="11">Trunk representation: double-line, label includes trunk id + member count</text>
+<text x="34" y="732" font-size="11">STP blocked shown only when data exists</text>
+<text x="34" y="750" font-size="11">Shading by type: switch/firewall/server/AP plus stack and HA clusters</text>
+<rect class="title-block" x="2510.0" y="674" width="336" height="92" fill="#f1f5f9" stroke="#334155"/>
+<text x="2520.0" y="702" font-size="14" font-weight="700">Network Diagram Generator</text>
+<text x="2520.0" y="724" font-size="11">Paper: 17x11 inches</text>
+<rect class="info-box" x="2350.0" y="20" width="490" height="145" fill="#f8fafc" stroke="#64748b"/>
+<text x="2358.0" y="38" font-size="12" font-weight="700">Routing table</text>
+<text x="2358.0" y="54" font-size="10">ACCESS1: C 172.16.10.0/24 directly connected</text>
+<text x="2358.0" y="66" font-size="10">ACCESS2: C 172.16.10.0/24 directly connected</text>
+<text x="2358.0" y="78" font-size="10">CORE1: C 10.0.0.0/24 is directly connected</text>
+<text x="2358.0" y="90" font-size="10">CORE1: S 0.0.0.0/0 via 10.0.0.1</text>
+<text x="2358.0" y="102" font-size="10">CORE2: C 10.0.0.0/24 is directly connected</text>
+<text x="2358.0" y="114" font-size="10">CORE2: S 0.0.0.0/0 via 10.0.0.1</text>
+<text x="2358.0" y="126" font-size="10">DIST1: C 172.16.10.0/24 directly connected</text>
+<text x="2358.0" y="138" font-size="10">DIST2: O 10.10.0.0/16 via 10.0.0.2</text>
+<rect class="info-box" x="2350.0" y="175" width="490" height="145" fill="#f8fafc" stroke="#64748b"/>
+<text x="2358.0" y="193" font-size="12" font-weight="700">DHCP scopes</text>
+<text x="2358.0" y="209" font-size="10">CORE1: Pool --</text>
+<text x="2358.0" y="221" font-size="10">CORE1: Pool BRANCH_POOL</text>
+<text x="2358.0" y="233" font-size="10">CORE2: Pool --</text>
+<text x="2358.0" y="245" font-size="10">CORE2: Pool BRANCH_POOL</text>
+<text x="2358.0" y="257" font-size="10">DIST2: WLAN_POOL</text>
+<text x="2358.0" y="269" font-size="10">EDGE1: WLAN_POOL</text>
+<text x="2358.0" y="281" font-size="10">EDGE2: WLAN_POOL</text>
+<text x="2358.0" y="293" font-size="10">EDGE3: WLAN_POOL</text>
+<rect class="info-box" x="2350.0" y="330" width="490" height="145" fill="#f8fafc" stroke="#64748b"/>
+<text x="2358.0" y="348" font-size="12" font-weight="700">VLANs</text>
+<text x="2358.0" y="364" font-size="10">ACCESS1: VLAN 10 Users</text>
+<text x="2358.0" y="376" font-size="10">ACCESS1: VLAN 20 Voice</text>
+<text x="2358.0" y="388" font-size="10">ACCESS2: VLAN 10 Users</text>
+<text x="2358.0" y="400" font-size="10">ACCESS2: VLAN 20 Voice</text>
+<text x="2358.0" y="412" font-size="10">CORE1: VLAN 10 Users</text>
+<text x="2358.0" y="424" font-size="10">CORE1: VLAN 20 Voice</text>
+<text x="2358.0" y="436" font-size="10">CORE1: VLAN 30 Servers</text>
+<text x="2358.0" y="448" font-size="10">CORE2: VLAN 10 Users</text>
 </svg>

@@ -1,40 +1,43 @@
-ArubaOS-S Software
 hostname DIST2
-Model number: 6300
-Management Address: 10.0.1.2
--- show running-config --
-hostname DIST2
-ip routing
+ArubaOS-Switch
 -- show lldp neighbors detail --
-Local Port: 1/1/5
+Local Port: 1/1/1
+Neighbor: CORE1
+Neighbor Port: Gi1/0/4
+Type: switch
+Speed: 10G
+Media: fiber
+Local Port: 1/1/2
+Neighbor: CORE2
+Neighbor Port: Gi1/0/4
+Type: switch
+Speed: 10G
+Media: fiber
+Local Port: 1/1/3
 Neighbor: EDGE3
-Neighbor Port: 1
+Neighbor Port: 1/1/1
 Type: switch
 Speed: 1G
 Media: copper
-Trunk: normal
-
-Local Port: 1/1/6
+Local Port: 1/1/4
 Neighbor: EDGE4
-Neighbor Port: 1
+Neighbor Port: 1/1/1
 Type: switch
 Speed: 1G
 Media: copper
-Trunk: normal
-
-Local Port: 1/1/7
-Neighbor: ACCESS2
-Neighbor Port: 1
-Type: switch
+Local Port: 1/1/5
+Neighbor: AP-2
+Neighbor Port: eth0
+Type: ap
 Speed: 1G
 Media: copper
-Trunk: normal
-
 -- show spanning-tree --
+Root this switch
+BLK 1/1/3
 -- show vlan --
 10 Users
-20 Voice
 30 Servers
 -- show ip route --
-C 10.10.10.0/24 is directly connected
-S 0.0.0.0/0 via 10.0.0.254
+O 10.10.0.0/16 via 10.0.0.2
+-- show dhcp-server --
+Pool WLAN_POOL

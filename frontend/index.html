@@ -9,9 +9,9 @@
     body { font-family: Arial, sans-serif; margin: 0; padding: 16px; background: #f8fafc; }
     .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
     .card { background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; }
+    .row { margin:8px 0; display:block; }
     .export { margin-top:16px; }
-    .row { margin:8px 0; }
-    iframe { width:100%; height:520px; border:1px solid #94a3b8; background:#fff; }
+    iframe { width:100%; height:520px; border:1px solid #94a3b8; background:#fff; margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -25,13 +25,22 @@ function App(){
   const [svg, setSvg] = React.useState('');
 
   async function refreshStatus(){
-    const r = await fetch('/api/status'); setStatus(await r.json());
+    const r = await fetch('/api/status');
+    setStatus(await r.json());
   }
-  React.useEffect(()=>{refreshStatus();},[]);
+  React.useEffect(()=>{ refreshStatus(); },[]);
+
+  function markStale(next){
+    setFilters(next);
+    if(status.loaded){
+      setStatus({...status, stale:true});
+    }
+  }
 
   async function ingestBundle(){
     const fd = new FormData();
-    fd.append('zip_file', files.zip); fd.append('ini_file', files.ini);
+    fd.append('zip_file', files.zip);
+    fd.append('ini_file', files.ini);
     if(files.excel) fd.append('excel_file', files.excel);
     await fetch('/api/ingest/bundle',{method:'POST', body:fd});
     await refreshStatus();
@@ -40,42 +49,54 @@ function App(){
 
   async function exp(kind){
     const fd = new FormData();
-    fd.append('include_servers', filters.servers); fd.append('include_aps', filters.aps);
-    fd.append('include_aws', filters.aws); fd.append('include_azure', filters.azure); fd.append('include_other_cloud', filters.other);
-    fd.append('paginate', filters.paginate); fd.append('fit_to_page', filters.fit);
-    const r = await fetch('/api/export/'+kind, {method:'POST', body:fd});
+    fd.append('include_servers', filters.servers);
+    fd.append('include_aps', filters.aps);
+    fd.append('include_aws', filters.aws);
+    fd.append('include_azure', filters.azure);
+    fd.append('include_other_cloud', filters.other);
+    fd.append('paginate', filters.paginate);
+    fd.append('fit_to_page', filters.fit);
+    const r = await fetch('/api/export/'+kind,{method:'POST', body:fd});
     const blob = await r.blob();
     if(kind==='svg'){ setSvg(URL.createObjectURL(blob)); }
-    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='diagram.'+kind; a.click();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'diagram.' + kind;
+    a.click();
     await refreshStatus();
   }
 
-  const setFile = (k,ev)=> setFiles({...files,[k]:ev.target.files[0]});
-  const setF = (k,v)=> {setFilters({...filters,[k]:v}); setStatus({...status, stale:true});};
+  const setFile = (k,ev)=>setFiles({...files,[k]:ev.target.files[0]});
 
   return e('div',null,
     e('h1',null,'Network Diagram Generator'),
     e('div',{className:'grid'},
       e('div',{className:'card'},
         e('h3',null,'Ingest'),
-        e('div',{className:'row'},'ZIP: ',e('input',{type:'file',onChange:(ev)=>setFile('zip',ev)})),
-        e('div',{className:'row'},'INI: ',e('input',{type:'file',onChange:(ev)=>setFile('ini',ev)})),
-        e('div',{className:'row'},'Excel (optional): ',e('input',{type:'file',onChange:(ev)=>setFile('excel',ev)})),
-        e('button',{onClick:ingestBundle, disabled:!files.zip||!files.ini},'Ingest Bundle')
+        e('label',{className:'row'},'ZIP switch exports: ',e('input',{type:'file',onChange:(ev)=>setFile('zip',ev)})),
+        e('label',{className:'row'},'INI edge template: ',e('input',{type:'file',onChange:(ev)=>setFile('ini',ev)})),
+        e('label',{className:'row'},'Excel (optional): ',e('input',{type:'file',onChange:(ev)=>setFile('excel',ev)})),
+        e('button',{onClick:ingestBundle,disabled:!files.zip||!files.ini},'Ingest Bundle')
       ),
       e('div',{className:'card'},
         e('h3',null,'Filters'),
-        ['servers','aps','aws','azure','other'].map(k=>e('label',{key:k,className:'row'}, e('input',{type:'checkbox',checked:filters[k],onChange:(ev)=>setF(k,ev.target.checked)}),' Include '+k)),
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.servers,onChange:(ev)=>markStale({...filters,servers:ev.target.checked})}),' include servers'),
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.aps,onChange:(ev)=>markStale({...filters,aps:ev.target.checked})}),' include access points'),
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.aws,onChange:(ev)=>markStale({...filters,aws:ev.target.checked})}),' include AWS'),
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.azure,onChange:(ev)=>markStale({...filters,azure:ev.target.checked})}),' include Azure'),
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.other,onChange:(ev)=>markStale({...filters,other:ev.target.checked})}),' include Other cloud provider'),
         e('h4',null,'Pagination'),
-        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.paginate,onChange:(ev)=>setF('paginate',ev.target.checked)}),' Paginate'),
-        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.fit,onChange:(ev)=>setF('fit',ev.target.checked)}),' Fit-to-page')
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.paginate,onChange:(ev)=>markStale({...filters,paginate:ev.target.checked})}),' Paginate'),
+        e('label',{className:'row'},e('input',{type:'checkbox',checked:filters.fit,onChange:(ev)=>markStale({...filters,fit:ev.target.checked})}),' Fit to page')
       )
     ),
     e('div',{className:'card export'},
       e('h3',null,'Export'),
-      status.stale ? e('p',{style:{color:'#b45309'}},'Export is stale. Re-export with current filters.') : e('p',{style:{color:'#15803d'}},'Export is up to date.'),
-      e('button',{onClick:()=>exp('svg')},'Export SVG'),' ',
-      e('button',{onClick:()=>exp('pdf')},'Export PDF')
+      status.stale
+        ? e('p',{style:{color:'#b45309'}},'Export stale: filters changed after ingest. Re-export without re-ingest is supported.')
+        : e('p',{style:{color:'#15803d'}},'Export up to date.'),
+      e('button',{onClick:()=>exp('svg'),disabled:!status.loaded},'Export SVG'),' ',
+      e('button',{onClick:()=>exp('pdf'),disabled:!status.loaded},'Export PDF')
     ),
     svg ? e('iframe',{src:svg}) : null
   );
