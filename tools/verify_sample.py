@@ -213,7 +213,7 @@ def verify_svg(svg: str) -> None:
         else:
             dist = abs(y - sy1)
         eid = label.attrib.get("data-edge-id", "")
-        max_dist = 80
+        max_dist = 24 if edge_media.get(eid) != "stacking" else 80
         assert_true(dist <= max_dist, f"Label too far from chosen segment ({dist:.1f}px): {txt}")
 
         # vertical label overlap rules

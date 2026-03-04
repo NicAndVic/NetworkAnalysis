@@ -330,6 +330,14 @@ class Renderer:
             return [(points[0], points[-1])]
         return [(p1, p2) for _, p1, p2 in ordered]
 
+    def _segment_midpoint_in_blocker(self, seg: Tuple[Tuple[float, float], Tuple[float, float]]) -> bool:
+        mx = (seg[0][0] + seg[1][0]) / 2
+        my = (seg[0][1] + seg[1][1]) / 2
+        for box in list(self.node_boxes.values()) + [b for _, b in self.cluster_boxes]:
+            if self._point_in_box(mx, my, box):
+                return True
+        return False
+
     def _place_label(self, text: str, seg: Tuple[Tuple[float, float], Tuple[float, float]]) -> Tuple[float, float, Box] | None:
         p1, p2 = seg
         mx = (p1[0] + p2[0]) / 2
@@ -339,16 +347,19 @@ class Renderer:
 
         is_horizontal = p1[1] == p2[1]
         attempts: List[Tuple[float, float]] = []
+        nudge_vals = [0, -2, 2, -4, 4, -8, 8, -10, 10]
+        if "/stacking" in text:
+            nudge_vals = [0, -2, 2, -4, 4, -8, 8, -12, 12, -20, 20, -30, 30, -40, 40]
         if is_horizontal:
             for slide in [0, -6, 6, -12, 12, -20, 20]:
-                for nudge in [0, -2, 2, -4, 4, -10, 10, -18, 18, -28, 28, -40, 40, -56, 56, -72, 72, -86, 86]:
+                for nudge in nudge_vals:
                     attempts.append((slide, nudge))
         else:
             for slide in [0, -6, 6, -12, 12, -20, 20]:
-                for nudge in [0, -2, 2, -4, 4, -10, 10, -18, 18, -28, 28, -40, 40, -56, 56, -72, 72, -86, 86]:
+                for nudge in nudge_vals:
                     attempts.append((nudge, slide))
 
-        blockers = list(self.node_boxes.values()) + [box for _, box in self.cluster_boxes] + self.label_boxes
+        blockers = list(self.node_boxes.values()) + [box for _, box in self.cluster_boxes]
         for ox, oy in attempts:
             x = mx + ox
             y = my + oy
@@ -358,6 +369,15 @@ class Renderer:
             self.label_boxes.append(box)
             return x, y, box
 
+        if "/stacking" in text:
+            fx = mx
+            fy = my - 60 if is_horizontal else my
+            if not is_horizontal:
+                fx = mx + 60
+            fbox = Box(fx - width / 2, fy - height + 2, width, height)
+            if not any(self._box_intersects(fbox, blocker) for blocker in blockers):
+                self.label_boxes.append(fbox)
+                return fx, fy, fbox
         return None
 
     def _draw_node(self, device: Device) -> str:
@@ -468,17 +488,30 @@ class Renderer:
                 label += " STP blocked"
 
             placed = None
-            chosen_seg = self._label_segment_candidates(routed.points)[0]
-            for candidate_seg in self._label_segment_candidates(routed.points):
+            all_segments = self._label_segment_candidates(routed.points)
+            candidates = [seg for seg in all_segments if not self._segment_midpoint_in_blocker(seg)]
+            if not candidates:
+                candidates = all_segments
+            chosen_seg = candidates[0]
+            for candidate_seg in candidates:
                 placed = self._place_label(label, candidate_seg)
                 if placed is not None:
                     chosen_seg = candidate_seg
                     break
             if placed is None:
-                chosen_seg = self._label_segment_candidates(routed.points)[0]
+                chosen_seg = candidates[0]
                 mx = (chosen_seg[0][0] + chosen_seg[1][0]) / 2
                 my = (chosen_seg[0][1] + chosen_seg[1][1]) / 2
                 lx, ly = mx, my
+                if link.media == "stacking":
+                    for off in [60, 72, 84]:
+                        testy = my - off
+                        width = max(40.0, len(label) * 6.2)
+                        tbox = Box(mx - width / 2, testy - 10, mx + width / 2 - (mx - width / 2), 12)
+                        blockers = list(self.node_boxes.values()) + [b for _, b in self.cluster_boxes]
+                        if not any(self._box_intersects(tbox, b) for b in blockers):
+                            ly = testy
+                            break
             else:
                 lx, ly, _ = placed
             parts.append(
