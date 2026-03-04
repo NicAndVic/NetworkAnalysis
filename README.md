@@ -43,12 +43,21 @@ uvicorn backend.app.main:app --host 0.0.0.0 --port 8080
 Open `http://localhost:8080`.
 
 ## Use sample bundle
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+Canonical sample bundle is generated under `samples/` (plus mirrored `sample_data/` for compatibility).
+Generate bundle with:
+```bash
+python tools/create_sample_data.py
+```
+Upload `samples/sample_bundle.zip`, `samples/sample_edge.ini`, and `samples/sample_manual.xlsx`.
+=======
 Files in `sample_data/` include command-output `.txt` sources and `edge_template.ini`.
 Generate sample ZIP/XLSX bundle with:
 ```bash
 python tools/create_sample_data.py
 ```
 Then upload generated files (`switch_exports.zip`, `edge_template.ini`, `manual_template.xlsx`) in GUI.
+>>>>>>> main
 
 ## Run verification harness
 ```bash
@@ -62,6 +71,16 @@ Verifier checks:
 - labels use midpoint anchoring and avoid node/cluster collisions
 - PDF is non-empty
 
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+
+## Binary-file guard
+Run this before opening/updating a PR to avoid "Binary files are not supported" errors:
+```bash
+python tools/check_no_tracked_binaries.py --history
+```
+
+=======
+>>>>>>> main
 ## Regenerate runbooks
 ```bash
 python generate_runbooks.py

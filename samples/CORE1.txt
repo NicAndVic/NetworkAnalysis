@@ -1,15 +1,15 @@
 Cisco IOS-XE Software
-hostname CORE2
+hostname CORE1
 Model number: C9500
-Management Address: 10.0.0.2
+Management Address: 10.0.0.1
 Stack member 1
 -- show running-config --
-hostname CORE2
+hostname CORE1
 ip routing
 ip dhcp pool USERS
 -- show lldp neighbors detail --
 Local Port: Te1/1
-Neighbor: CORE1
+Neighbor: CORE2
 Neighbor Port: Te1/1
 Type: switch
 Speed: 40G
@@ -18,52 +18,39 @@ Trunk: stack
 
 Local Port: Te1/2
 Neighbor: DIST1
-Neighbor Port: 1/1/3
+Neighbor Port: 1/1/1
 Type: switch
 Speed: 10G
 Media: fiber
-Trunk: Po11
+Trunk: Po10
 
 Local Port: Te1/3
 Neighbor: DIST1
-Neighbor Port: 1/1/4
+Neighbor Port: 1/1/2
 Type: switch
 Speed: 10G
 Media: fiber
-Trunk: Po11
+Trunk: Po10
 
 Local Port: Te1/4
 Neighbor: DIST2
-Neighbor Port: 1/1/3
+Neighbor Port: 1/1/1
 Type: switch
 Speed: 10G
 Media: fiber
-Trunk: Po21
+Trunk: Po20
 
 Local Port: Te1/5
 Neighbor: DIST2
-Neighbor Port: 1/1/4
+Neighbor Port: 1/1/2
 Type: switch
 Speed: 10G
 Media: fiber
-Trunk: Po21
+Trunk: Po20
 
 Local Port: Te1/10
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-Neighbor: FW-B
-Neighbor Port: port1
-=======
 Neighbor: FW-A
-Neighbor Port: port2
-Type: firewall
-Speed: 10G
-Media: fiber
-Trunk: normal
-
-Local Port: Te1/11
-Neighbor: FW-B
-Neighbor Port: port2
->>>>>>> main
+Neighbor Port: port1
 Type: firewall
 Speed: 10G
 Media: fiber
@@ -79,8 +66,4 @@ This bridge is the root
 C 10.10.10.0/24 is directly connected
 S 0.0.0.0/0 via 10.0.0.254
 -- show ip dhcp pool --
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
 ip dhcp pool USERS
-=======
-Pool USERS 10.10.10.0/24
->>>>>>> main

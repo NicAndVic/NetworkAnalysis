@@ -1,0 +1,41 @@
+ArubaOS-S Software
+hostname DIST1
+Model number: 6300
+Management Address: 10.0.1.1
+-- show running-config --
+hostname DIST1
+ip routing
+-- show lldp neighbors detail --
+Local Port: 1/1/5
+Neighbor: EDGE1
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: copper
+Trunk: normal
+
+Local Port: 1/1/6
+Neighbor: EDGE2
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: copper
+Trunk: normal
+
+Local Port: 1/1/7
+Neighbor: ACCESS1
+Neighbor Port: 1
+Type: switch
+Speed: 1G
+Media: copper
+Trunk: normal
+
+-- show spanning-tree --
+BLK 1/1/6
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

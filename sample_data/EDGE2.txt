@@ -5,6 +5,11 @@ Management Address: 10.0.2.2
 -- show running-config --
 hostname EDGE2
 ip routing
+-- show lldp info remote-device detail --
+Local Port: 2
+System Name: EDGE6
+Port Id: 1
+System Description: switch
 -- show lldp neighbors detail --
 Local Port: 2
 Neighbor: EDGE6
@@ -15,6 +20,9 @@ Media: dac
 Trunk: normal
 
 Local Port: 3
+System Name: AP2
+Port Id: eth0
+System Description: ap
 Neighbor: AP2
 Neighbor Port: eth0
 Type: ap

@@ -1,37 +1,23 @@
 HP ProCurve Software
-hostname EDGE1
+hostname EDGE2
 Model number: 2930F
-Management Address: 10.0.2.1
+Management Address: 10.0.2.2
 -- show running-config --
-hostname EDGE1
+hostname EDGE2
 ip routing
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
 -- show lldp info remote-device detail --
 Local Port: 2
-System Name: EDGE5
+System Name: EDGE6
 Port Id: 1
 System Description: switch
-=======
--- show lldp neighbors detail --
-Local Port: 2
-Neighbor: EDGE5
-Neighbor Port: 1
-Type: switch
->>>>>>> main
 Speed: 1G
 Media: dac
 Trunk: normal
 
 Local Port: 3
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-System Name: AP1
+System Name: AP2
 Port Id: eth0
 System Description: ap
-=======
-Neighbor: AP1
-Neighbor Port: eth0
-Type: ap
->>>>>>> main
 Speed: 1G
 Media: copper
 Trunk: normal

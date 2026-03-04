@@ -56,6 +56,8 @@ Speed: 10G
 Media: fiber
 Trunk: normal
 
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+=======
 Local Port: Te1/11
 Neighbor: FW-B
 Neighbor Port: port1
@@ -64,6 +66,7 @@ Speed: 10G
 Media: fiber
 Trunk: normal
 
+>>>>>>> main
 -- show spanning-tree --
 This bridge is the root
 -- show vlan --
@@ -74,4 +77,8 @@ This bridge is the root
 C 10.10.10.0/24 is directly connected
 S 0.0.0.0/0 via 10.0.0.254
 -- show ip dhcp pool --
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+ip dhcp pool USERS
+=======
 Pool USERS 10.10.10.0/24
+>>>>>>> main

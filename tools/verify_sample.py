@@ -5,6 +5,10 @@ import math
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+from collections import deque
+=======
+>>>>>>> main
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -14,8 +18,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from backend.app.main import app
 
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+SAMPLE = ROOT / "samples"
+OUT = SAMPLE / "generated"
+=======
 SAMPLE = ROOT / "sample_data"
 OUT = ROOT / "sample_data" / "generated"
+>>>>>>> main
 OUT.mkdir(exist_ok=True)
 
 
@@ -24,7 +33,11 @@ def fail(msg: str):
 
 
 def ensure_sample_inputs() -> None:
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+    req = [SAMPLE / "sample_bundle.zip", SAMPLE / "sample_manual.xlsx", SAMPLE / "sample_edge.ini"]
+=======
     req = [SAMPLE / "switch_exports.zip", SAMPLE / "manual_template.xlsx", SAMPLE / "edge_template.ini"]
+>>>>>>> main
     if all(p.exists() for p in req):
         return
     subprocess.run([sys.executable, str(ROOT / "tools" / "create_sample_data.py")], check=True)
@@ -34,6 +47,53 @@ def intersects(a, b):
     return not (a[0] + a[2] <= b[0] or b[0] + b[2] <= a[0] or a[1] + a[3] <= b[1] or b[1] + b[3] <= a[1])
 
 
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+def connectivity_check(svg_root, ns):
+    node_ids = []
+    for elem in svg_root.findall('.//*[@id]', ns):
+        nid = elem.attrib.get('id', '')
+        if nid.startswith('node-'):
+            node_ids.append(nid[5:])
+    edges = svg_root.findall('.//s:line[@class="edge"]', ns) + svg_root.findall('.//s:line[@class="edge trunk"]', ns)
+    # can't recover endpoint ids from svg; fallback to topology status from app state
+    topo = app.__dict__.get('STATE', None)
+    if topo is None:
+        from backend.app.main import STATE
+        topo = STATE
+    t = topo["topology"]
+    graph = {k: set() for k, d in t.devices.items() if d.device_type == "switch"}
+    for l in t.links:
+        if l.src in graph and l.dst in graph:
+            graph[l.src].add(l.dst)
+            graph[l.dst].add(l.src)
+    if not graph:
+        fail("no switches in topology")
+    start = next(iter(graph))
+    seen = set([start])
+    q = deque([start])
+    while q:
+        cur = q.popleft()
+        for nb in graph[cur]:
+            if nb not in seen:
+                seen.add(nb)
+                q.append(nb)
+    iso = sorted(set(graph) - seen)
+    if iso:
+        fail(f"isolated switches found: {iso}")
+
+
+def main():
+    ensure_sample_inputs()
+    client = TestClient(app)
+
+    with open(SAMPLE / "sample_bundle.zip", "rb") as zf, open(SAMPLE / "sample_edge.ini", "rb") as inf, open(SAMPLE / "sample_manual.xlsx", "rb") as exf:
+        r = client.post(
+            "/api/ingest/bundle",
+            files={
+                "zip_file": ("sample_bundle.zip", zf, "application/zip"),
+                "ini_file": ("sample_edge.ini", inf, "text/plain"),
+                "excel_file": ("sample_manual.xlsx", exf, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+=======
 def main():
     ensure_sample_inputs()
     client = TestClient(app)
@@ -44,6 +104,7 @@ def main():
                 "zip_file": ("switch_exports.zip", zf, "application/zip"),
                 "ini_file": ("edge_template.ini", inf, "text/plain"),
                 "excel_file": ("manual_template.xlsx", exf, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+>>>>>>> main
             },
         )
     if r.status_code != 200:
@@ -65,30 +126,72 @@ def main():
 
     svg = svg_resp.text
     (OUT / "verify.svg").write_text(svg)
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+    # Keep PDF artifact optional to avoid accidental binary commits.
+    if __import__("os").environ.get("VERIFY_KEEP_PDF") == "1":
+        (OUT / "verify.pdf").write_bytes(pdf_resp.content)
+    
+    from backend.app.main import STATE
+    topo = STATE["topology"]
+
+    vendors = {d.vendor for d in topo.devices.values() if d.device_type == "switch"}
+    missing = {"cisco", "hp procurve", "aruba"} - vendors
+    if missing:
+        fail(f"missing vendor coverage: {sorted(missing)}")
+
+    if not any(l.link_type == "trunk" and l.members >= 2 for l in topo.links):
+        fail("no trunk with 2+ members parsed")
+    if not any(l.stp_blocked for l in topo.links):
+        fail("no STP blocked links parsed")
+
+    fw_links = {(l.src, l.dst) for l in topo.links}
+    pairA = any((a.startswith("CORE") and b == "FW-A") or (b.startswith("CORE") and a == "FW-A") for a, b in fw_links)
+    pairB = any((a.startswith("CORE") and b == "FW-B") or (b.startswith("CORE") and a == "FW-B") for a, b in fw_links)
+    if not (pairA and pairB):
+        fail("HA redundancy missing: core links must terminate on both FW-A and FW-B")
+=======
     (OUT / "verify.pdf").write_bytes(pdf_resp.content)
+>>>>>>> main
 
     root = ET.fromstring(svg)
     ns = {"s": "http://www.w3.org/2000/svg"}
 
     nodes = root.findall('.//s:rect[@class="node"]', ns)
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+    edges = root.findall('.//s:line[@class="edge"]', ns) + root.findall('.//s:line[@class="edge trunk"]', ns)
+    if len(nodes) < 12:
+        fail("insufficient device nodes")
+=======
     if len(nodes) < 12:
         fail("insufficient device nodes")
     edges = root.findall('.//s:line[@class="edge"]', ns) + root.findall('.//s:line[@class="edge trunk"]', ns)
+>>>>>>> main
     if len(edges) < 16:
         fail("insufficient edges")
 
     if not root.findall('.//s:rect[@class="legend"]', ns):
         fail("legend missing")
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+    for title in ["Routing", "DHCP", "VLANs"]:
+        if title not in svg:
+            fail(f"missing info box {title}")
+
+    if "node-Internet" not in svg or "node-ISP:ISP-A" not in svg or "node-CLOUD:AWS-Prod" not in svg:
+=======
     if "Routing" not in svg or "DHCP" not in svg or "VLANs" not in svg:
         fail("missing info boxes")
 
     if "node-Internet" not in svg or "ISP:ISP-A" not in svg or "CLOUD:AWS-Prod" not in svg:
+>>>>>>> main
         fail("internet/isp/cloud objects missing")
 
     trunk_lines = root.findall('.//s:line[@class="edge trunk"]', ns)
     if len(trunk_lines) < 2:
         fail("trunk double lines not detected")
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+=======
 
+>>>>>>> main
     if "STP blocked" not in svg:
         fail("STP blocked annotation missing")
 
@@ -131,20 +234,35 @@ def main():
             fail("label missing edge binding")
         seg = edge_map[edge_id][0]
         mx, my = (seg[0] + seg[2]) / 2, (seg[1] + seg[3]) / 2
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+        if math.hypot(x - mx, y - my) > 85:
+            fail("label too far from link midpoint")
+
+=======
         if math.hypot(x - mx, y - my) > 80:
             fail("label too far from link midpoint")
 
         # vertical label must not overlap other edges
+>>>>>>> main
         if abs(seg[0] - seg[2]) < 3:
             for other_id, segs in edge_map.items():
                 if other_id == edge_id:
                     continue
                 for s in segs:
+<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
+                    sb = (min(s[0], s[2]) - 1, min(s[1], s[3]) - 1, abs(s[0] - s[2]) + 2, abs(s[1] - s[3]) + 2)
+                    if intersects(lb, sb):
+                        fail("vertical label overlaps unrelated edge")
+
+    connectivity_check(root, ns)
+
+=======
                     x0, y0 = min(s[0], s[2]) - 1, min(s[1], s[3]) - 1
                     sb = (x0, y0, abs(s[0]-s[2]) + 2, abs(s[1]-s[3]) + 2)
                     if intersects(lb, sb):
                         fail("vertical label overlaps unrelated edge")
 
+>>>>>>> main
     if len(pdf_resp.content) < 1500:
         fail("pdf empty")
     reader = PdfReader(io.BytesIO(pdf_resp.content))
