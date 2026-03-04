@@ -1,0 +1,16 @@
+ArubaOS-S Software
+hostname EDGE6
+Model number: 6100
+Management Address: 10.0.2.6
+-- show running-config --
+hostname EDGE6
+ip routing
+-- show lldp neighbors detail --
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

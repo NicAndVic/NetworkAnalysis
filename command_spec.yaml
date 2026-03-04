@@ -1,0 +1,29 @@
+vendors:
+  cisco:
+    - show lldp neighbors detail
+    - show cdp neighbors detail
+    - show running-config
+    - show spanning-tree
+    - show interfaces status
+    - show etherchannel summary
+    - show vlan brief
+    - show ip route
+    - show ip dhcp pool
+  hp_procurve:
+    - show lldp info remote-device detail
+    - show running-config
+    - show spanning-tree
+    - show interfaces brief
+    - show trunks
+    - show vlans
+    - show ip route
+    - show dhcp-server
+  aruba:
+    - show lldp neighbors detail
+    - show running-config
+    - show spanning-tree
+    - show interfaces brief
+    - show lacp aggregates
+    - show vlan
+    - show ip route
+    - show dhcp-server statistics

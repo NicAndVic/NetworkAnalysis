@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+sample_data/manual_template.xlsx
+sample_data/switch_exports.zip
+sample_data/generated/verify.pdf
+samples/sample_manual.xlsx
+samples/sample_bundle.zip
+samples/generated/verify.pdf

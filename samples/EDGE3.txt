@@ -1,0 +1,24 @@
+Cisco IOS Software
+hostname EDGE3
+Model number: 9200
+Management Address: 10.0.2.3
+-- show running-config --
+hostname EDGE3
+ip routing
+-- show lldp neighbors detail --
+Local Port: 3
+Neighbor: AP3
+Neighbor Port: eth0
+Type: ap
+Speed: 1G
+Media: copper
+Trunk: normal
+
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254

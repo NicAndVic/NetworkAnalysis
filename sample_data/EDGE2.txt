@@ -1,0 +1,32 @@
+HP ProCurve Software
+hostname EDGE2
+Model number: 2930F
+Management Address: 10.0.2.2
+-- show running-config --
+hostname EDGE2
+ip routing
+-- show lldp info remote-device detail --
+Local Port: 2
+System Name: EDGE6
+Port Id: 1
+System Description: switch
+Speed: 1G
+Media: dac
+Trunk: normal
+
+Local Port: 3
+System Name: AP2
+Port Id: eth0
+System Description: ap
+Speed: 1G
+Media: copper
+Trunk: normal
+
+-- show spanning-tree --
+-- show vlan --
+10 Users
+20 Voice
+30 Servers
+-- show ip route --
+C 10.10.10.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.254
