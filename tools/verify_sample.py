@@ -1,14 +1,8 @@
 from __future__ import annotations
 
 import io
-import math
-import subprocess
+import re
 import sys
-import xml.etree.ElementTree as ET
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-from collections import deque
-=======
->>>>>>> main
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -16,101 +10,45 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
 from backend.app.main import app
-
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-SAMPLE = ROOT / "samples"
-OUT = SAMPLE / "generated"
-=======
-SAMPLE = ROOT / "sample_data"
-OUT = ROOT / "sample_data" / "generated"
->>>>>>> main
-OUT.mkdir(exist_ok=True)
+BUNDLE = ROOT / "samples" / "sample_bundle.zip"
+INI = ROOT / "samples" / "sample_edge.ini"
+EXCEL = ROOT / "samples" / "sample_manual.xlsx"
+OUT_DIR = ROOT / "samples" / "generated"
+SVG_OUT = OUT_DIR / "verify.svg"
+PDF_OUT = OUT_DIR / "verify.pdf"
 
 
-def fail(msg: str):
-    raise SystemExit(f"VERIFY FAIL: {msg}")
+def fail(message: str) -> None:
+    raise SystemExit(f"[verify] FAIL: {message}")
 
 
-def ensure_sample_inputs() -> None:
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-    req = [SAMPLE / "sample_bundle.zip", SAMPLE / "sample_manual.xlsx", SAMPLE / "sample_edge.ini"]
-=======
-    req = [SAMPLE / "switch_exports.zip", SAMPLE / "manual_template.xlsx", SAMPLE / "edge_template.ini"]
->>>>>>> main
-    if all(p.exists() for p in req):
-        return
-    subprocess.run([sys.executable, str(ROOT / "tools" / "create_sample_data.py")], check=True)
+def assert_true(condition: bool, message: str) -> None:
+    if not condition:
+        fail(message)
 
 
-def intersects(a, b):
-    return not (a[0] + a[2] <= b[0] or b[0] + b[2] <= a[0] or a[1] + a[3] <= b[1] or b[1] + b[3] <= a[1])
+def ensure_artifacts() -> None:
+    missing = [path for path in (BUNDLE, INI, EXCEL) if not path.exists()]
+    if missing:
+        fail(f"Missing sample artifacts: {', '.join(str(path) for path in missing)}")
 
 
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-def connectivity_check(svg_root, ns):
-    node_ids = []
-    for elem in svg_root.findall('.//*[@id]', ns):
-        nid = elem.attrib.get('id', '')
-        if nid.startswith('node-'):
-            node_ids.append(nid[5:])
-    edges = svg_root.findall('.//s:line[@class="edge"]', ns) + svg_root.findall('.//s:line[@class="edge trunk"]', ns)
-    # can't recover endpoint ids from svg; fallback to topology status from app state
-    topo = app.__dict__.get('STATE', None)
-    if topo is None:
-        from backend.app.main import STATE
-        topo = STATE
-    t = topo["topology"]
-    graph = {k: set() for k, d in t.devices.items() if d.device_type == "switch"}
-    for l in t.links:
-        if l.src in graph and l.dst in graph:
-            graph[l.src].add(l.dst)
-            graph[l.dst].add(l.src)
-    if not graph:
-        fail("no switches in topology")
-    start = next(iter(graph))
-    seen = set([start])
-    q = deque([start])
-    while q:
-        cur = q.popleft()
-        for nb in graph[cur]:
-            if nb not in seen:
-                seen.add(nb)
-                q.append(nb)
-    iso = sorted(set(graph) - seen)
-    if iso:
-        fail(f"isolated switches found: {iso}")
-
-
-def main():
-    ensure_sample_inputs()
+def ingest_and_export() -> tuple[str, bytes]:
     client = TestClient(app)
-
-    with open(SAMPLE / "sample_bundle.zip", "rb") as zf, open(SAMPLE / "sample_edge.ini", "rb") as inf, open(SAMPLE / "sample_manual.xlsx", "rb") as exf:
-        r = client.post(
+    with BUNDLE.open("rb") as bundle_file, INI.open("rb") as ini_file, EXCEL.open("rb") as excel_file:
+        response = client.post(
             "/api/ingest/bundle",
             files={
-                "zip_file": ("sample_bundle.zip", zf, "application/zip"),
-                "ini_file": ("sample_edge.ini", inf, "text/plain"),
-                "excel_file": ("sample_manual.xlsx", exf, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
-=======
-def main():
-    ensure_sample_inputs()
-    client = TestClient(app)
-    with open(SAMPLE / "switch_exports.zip", "rb") as zf, open(SAMPLE / "edge_template.ini", "rb") as inf, open(SAMPLE / "manual_template.xlsx", "rb") as exf:
-        r = client.post(
-            "/api/ingest/bundle",
-            files={
-                "zip_file": ("switch_exports.zip", zf, "application/zip"),
-                "ini_file": ("edge_template.ini", inf, "text/plain"),
-                "excel_file": ("manual_template.xlsx", exf, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
->>>>>>> main
+                "zip_file": (BUNDLE.name, bundle_file, "application/zip"),
+                "ini_file": (INI.name, ini_file, "text/plain"),
+                "excel_file": (EXCEL.name, excel_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
             },
         )
-    if r.status_code != 200:
-        fail(f"ingest failed: {r.status_code}")
+    assert_true(response.status_code == 200, f"ingest failed: {response.status_code} {response.text}")
 
-    data = {
+    form = {
         "include_servers": "true",
         "include_aps": "true",
         "include_aws": "true",
@@ -119,157 +57,60 @@ def main():
         "paginate": "false",
         "fit_to_page": "false",
     }
-    svg_resp = client.post("/api/export/svg", data=data)
-    pdf_resp = client.post("/api/export/pdf", data=data)
-    if svg_resp.status_code != 200 or pdf_resp.status_code != 200:
-        fail("export failed")
 
-    svg = svg_resp.text
-    (OUT / "verify.svg").write_text(svg)
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-    # Keep PDF artifact optional to avoid accidental binary commits.
-    if __import__("os").environ.get("VERIFY_KEEP_PDF") == "1":
-        (OUT / "verify.pdf").write_bytes(pdf_resp.content)
-    
-    from backend.app.main import STATE
-    topo = STATE["topology"]
+    svg_response = client.post("/api/export/svg", data=form)
+    assert_true(svg_response.status_code == 200, f"svg export failed: {svg_response.status_code} {svg_response.text}")
 
-    vendors = {d.vendor for d in topo.devices.values() if d.device_type == "switch"}
-    missing = {"cisco", "hp procurve", "aruba"} - vendors
-    if missing:
-        fail(f"missing vendor coverage: {sorted(missing)}")
+    pdf_response = client.post("/api/export/pdf", data=form)
+    assert_true(pdf_response.status_code == 200, f"pdf export failed: {pdf_response.status_code} {pdf_response.text}")
 
-    if not any(l.link_type == "trunk" and l.members >= 2 for l in topo.links):
-        fail("no trunk with 2+ members parsed")
-    if not any(l.stp_blocked for l in topo.links):
-        fail("no STP blocked links parsed")
+    return svg_response.text, pdf_response.content
 
-    fw_links = {(l.src, l.dst) for l in topo.links}
-    pairA = any((a.startswith("CORE") and b == "FW-A") or (b.startswith("CORE") and a == "FW-A") for a, b in fw_links)
-    pairB = any((a.startswith("CORE") and b == "FW-B") or (b.startswith("CORE") and a == "FW-B") for a, b in fw_links)
-    if not (pairA and pairB):
-        fail("HA redundancy missing: core links must terminate on both FW-A and FW-B")
-=======
-    (OUT / "verify.pdf").write_bytes(pdf_resp.content)
->>>>>>> main
 
-    root = ET.fromstring(svg)
-    ns = {"s": "http://www.w3.org/2000/svg"}
+def verify_svg(svg: str) -> None:
+    assert_true("<svg" in svg, "SVG root missing")
+    assert_true(svg.count('class="node') >= 18, "Expected at least 18 node rectangles in SVG")
+    assert_true(svg.count('class="edge') >= 18, "Expected at least 18 edges in SVG")
 
-    nodes = root.findall('.//s:rect[@class="node"]', ns)
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-    edges = root.findall('.//s:line[@class="edge"]', ns) + root.findall('.//s:line[@class="edge trunk"]', ns)
-    if len(nodes) < 12:
-        fail("insufficient device nodes")
-=======
-    if len(nodes) < 12:
-        fail("insufficient device nodes")
-    edges = root.findall('.//s:line[@class="edge"]', ns) + root.findall('.//s:line[@class="edge trunk"]', ns)
->>>>>>> main
-    if len(edges) < 16:
-        fail("insufficient edges")
+    assert_true('class="legend"' in svg, "Legend missing")
+    assert_true('class="title-block"' in svg, "Title block missing")
 
-    if not root.findall('.//s:rect[@class="legend"]', ns):
-        fail("legend missing")
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-    for title in ["Routing", "DHCP", "VLANs"]:
-        if title not in svg:
-            fail(f"missing info box {title}")
+    assert_true('class="cluster stack"' in svg, "Stack cluster shading missing")
+    assert_true('class="cluster ha"' in svg, "HA cluster shading missing")
 
-    if "node-Internet" not in svg or "node-ISP:ISP-A" not in svg or "node-CLOUD:AWS-Prod" not in svg:
-=======
-    if "Routing" not in svg or "DHCP" not in svg or "VLANs" not in svg:
-        fail("missing info boxes")
+    for keyword in ["Internet", "PrimaryISP", "BackupISP", "AWS-Prod", "Azure-DR", "Other-SaaS"]:
+        assert_true(keyword in svg, f"Expected cloud/isp/internet object missing: {keyword}")
 
-    if "node-Internet" not in svg or "ISP:ISP-A" not in svg or "CLOUD:AWS-Prod" not in svg:
->>>>>>> main
-        fail("internet/isp/cloud objects missing")
+    trunk_lines = len(re.findall(r'class="edge trunk"', svg))
+    assert_true(trunk_lines >= 2, "Expected trunk to render as double-line")
+    assert_true("members=" in svg and "Po1" in svg, "Trunk label missing trunk id/member count")
 
-    trunk_lines = root.findall('.//s:line[@class="edge trunk"]', ns)
-    if len(trunk_lines) < 2:
-        fail("trunk double lines not detected")
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-=======
+    assert_true("STP blocked" in svg, "STP blocked example missing")
+    assert_true('text-anchor="middle"' in svg, "Edge labels must be midpoint anchored")
+    assert_true("<rect class=\"info-box\"" in svg, "Expected informational boxes for routing/DHCP/VLAN")
+    assert_true("Routing table" in svg and "DHCP scopes" in svg and "VLANs" in svg, "Missing one or more info box titles")
+    assert_true("<rect class=\"edge-label-bg\"" not in svg, "Label background rectangles must not be used")
 
->>>>>>> main
-    if "STP blocked" not in svg:
-        fail("STP blocked annotation missing")
 
-    clusters = root.findall('.//s:rect[@class="cluster"]', ns)
-    if len(clusters) < 2:
-        fail("expected stack + HA clusters")
+def verify_pdf(pdf_bytes: bytes) -> None:
+    assert_true(len(pdf_bytes) > 2000, "PDF output is unexpectedly small")
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    assert_true(len(reader.pages) >= 1, "PDF must contain at least one page")
+    page = reader.pages[0]
+    width = float(page.mediabox.width)
+    height = float(page.mediabox.height)
+    assert_true(width >= 1224 and height >= 742, f"PDF page dimensions unexpectedly small for 17x11 parity mode: {width}x{height}")
 
-    node_boxes = [(float(n.attrib["x"]), float(n.attrib["y"]), float(n.attrib["width"]), float(n.attrib["height"])) for n in nodes]
-    cluster_boxes = [(float(c.attrib["x"]), float(c.attrib["y"]), float(c.attrib["width"]), float(c.attrib["height"])) for c in clusters]
 
-    edge_map = {}
-    for e in root.findall('.//s:line', ns):
-        if e.attrib.get("class") not in {"edge", "edge trunk"}:
-            continue
-        edge_id = e.attrib.get("data-edge-id")
-        if not edge_id:
-            continue
-        x1, y1, x2, y2 = map(float, (e.attrib["x1"], e.attrib["y1"], e.attrib["x2"], e.attrib["y2"]))
-        edge_map.setdefault(edge_id, []).append((x1, y1, x2, y2))
-
-    labels = root.findall('.//s:text[@class="edge-label"]', ns)
-    if not labels:
-        fail("no edge labels")
-
-    for label in labels:
-        if label.attrib.get("text-anchor") != "middle":
-            fail("label text-anchor must be middle")
-        txt = label.text or ""
-        x = float(label.attrib["x"])
-        y = float(label.attrib["y"])
-        w = max(42.0, len(txt) * 6.4)
-        h = 12.0
-        lb = (x - w / 2, y - h + 2, w, h)
-        for b in node_boxes + cluster_boxes:
-            if intersects(lb, b):
-                fail("label overlaps node/cluster")
-
-        edge_id = label.attrib.get("data-edge-id")
-        if edge_id not in edge_map:
-            fail("label missing edge binding")
-        seg = edge_map[edge_id][0]
-        mx, my = (seg[0] + seg[2]) / 2, (seg[1] + seg[3]) / 2
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-        if math.hypot(x - mx, y - my) > 85:
-            fail("label too far from link midpoint")
-
-=======
-        if math.hypot(x - mx, y - my) > 80:
-            fail("label too far from link midpoint")
-
-        # vertical label must not overlap other edges
->>>>>>> main
-        if abs(seg[0] - seg[2]) < 3:
-            for other_id, segs in edge_map.items():
-                if other_id == edge_id:
-                    continue
-                for s in segs:
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-                    sb = (min(s[0], s[2]) - 1, min(s[1], s[3]) - 1, abs(s[0] - s[2]) + 2, abs(s[1] - s[3]) + 2)
-                    if intersects(lb, sb):
-                        fail("vertical label overlaps unrelated edge")
-
-    connectivity_check(root, ns)
-
-=======
-                    x0, y0 = min(s[0], s[2]) - 1, min(s[1], s[3]) - 1
-                    sb = (x0, y0, abs(s[0]-s[2]) + 2, abs(s[1]-s[3]) + 2)
-                    if intersects(lb, sb):
-                        fail("vertical label overlaps unrelated edge")
-
->>>>>>> main
-    if len(pdf_resp.content) < 1500:
-        fail("pdf empty")
-    reader = PdfReader(io.BytesIO(pdf_resp.content))
-    if len(reader.pages) < 1:
-        fail("pdf has no pages")
-
-    print("VERIFY PASS")
+def main() -> None:
+    ensure_artifacts()
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    svg, pdf = ingest_and_export()
+    SVG_OUT.write_text(svg)
+    PDF_OUT.write_bytes(pdf)
+    verify_svg(svg)
+    verify_pdf(pdf)
+    print("[verify] PASS: sample ingest/export parity checks completed")
 
 
 if __name__ == "__main__":

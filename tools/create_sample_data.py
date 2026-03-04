@@ -1,226 +1,267 @@
+from __future__ import annotations
+
+import io
+import zipfile
 from pathlib import Path
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-import shutil
-import zipfile
+
 from openpyxl import Workbook
 
-root = Path(__file__).resolve().parents[1]
-sample_data = root / "sample_data"
-samples = root / "samples"
-for base in [sample_data, samples]:
-    (base / "generated").mkdir(parents=True, exist_ok=True)
+ROOT = Path(__file__).resolve().parents[1]
+SAMPLES_DIR = ROOT / "samples"
+SAMPLE_DATA_DIR = ROOT / "sample_data"
 
-switches = [
-    ("CORE1", "Cisco IOS-XE", "C9500", "10.0.0.1", "core-stack", "cisco"),
-    ("CORE2", "Cisco IOS-XE", "C9500", "10.0.0.2", "core-stack", "cisco"),
-    ("DIST1", "ArubaOS-S", "6300", "10.0.1.1", None, "aruba"),
-    ("DIST2", "ArubaOS-S", "6300", "10.0.1.2", None, "aruba"),
-    ("EDGE1", "HP ProCurve", "2930F", "10.0.2.1", None, "procurve"),
-    ("EDGE2", "HP ProCurve", "2930F", "10.0.2.2", None, "procurve"),
-    ("EDGE3", "Cisco IOS", "9200", "10.0.2.3", None, "cisco"),
-    ("EDGE4", "Cisco IOS", "9200", "10.0.2.4", None, "cisco"),
-    ("EDGE5", "ArubaOS-S", "6100", "10.0.2.5", None, "aruba"),
-    ("EDGE6", "ArubaOS-S", "6100", "10.0.2.6", None, "aruba"),
-    ("ACCESS1", "Cisco IOS", "2960", "10.0.3.1", None, "cisco"),
-    ("ACCESS2", "Cisco IOS", "2960", "10.0.3.2", None, "cisco"),
-]
 
-neighbors = {
-    "CORE1": [("Te1/1", "CORE2", "Te1/1", "switch", "40G", "stacking", "stack"), ("Te1/2", "DIST1", "1/1/1", "switch", "10G", "fiber", "Po10"), ("Te1/3", "DIST1", "1/1/2", "switch", "10G", "fiber", "Po10"), ("Te1/4", "DIST2", "1/1/1", "switch", "10G", "fiber", "Po20"), ("Te1/5", "DIST2", "1/1/2", "switch", "10G", "fiber", "Po20"), ("Te1/10", "FW-A", "port1", "firewall", "10G", "fiber", "normal")],
-    "CORE2": [("Te1/1", "CORE1", "Te1/1", "switch", "40G", "stacking", "stack"), ("Te1/2", "DIST1", "1/1/3", "switch", "10G", "fiber", "Po11"), ("Te1/3", "DIST1", "1/1/4", "switch", "10G", "fiber", "Po11"), ("Te1/4", "DIST2", "1/1/3", "switch", "10G", "fiber", "Po21"), ("Te1/5", "DIST2", "1/1/4", "switch", "10G", "fiber", "Po21"), ("Te1/10", "FW-B", "port1", "firewall", "10G", "fiber", "normal")],
-=======
-import zipfile
-from openpyxl import Workbook
-
-root = Path(__file__).resolve().parents[1] / "sample_data"
-(root / "generated").mkdir(parents=True, exist_ok=True)
-
-switches = [
-    ("CORE1", "Cisco IOS-XE", "C9500", "10.0.0.1", "core-stack"),
-    ("CORE2", "Cisco IOS-XE", "C9500", "10.0.0.2", "core-stack"),
-    ("DIST1", "ArubaOS-S", "6300", "10.0.1.1", None),
-    ("DIST2", "ArubaOS-S", "6300", "10.0.1.2", None),
-    ("EDGE1", "HP ProCurve", "2930F", "10.0.2.1", None),
-    ("EDGE2", "HP ProCurve", "2930F", "10.0.2.2", None),
-    ("EDGE3", "Cisco IOS", "9200", "10.0.2.3", None),
-    ("EDGE4", "Cisco IOS", "9200", "10.0.2.4", None),
-    ("EDGE5", "ArubaOS-S", "6100", "10.0.2.5", None),
-    ("EDGE6", "ArubaOS-S", "6100", "10.0.2.6", None),
-    ("ACCESS1", "Cisco IOS", "2960", "10.0.3.1", None),
-    ("ACCESS2", "Cisco IOS", "2960", "10.0.3.2", None),
-]
-
-neighbors = {
-    "CORE1": [
-        ("Te1/1", "CORE2", "Te1/1", "switch", "40G", "stacking", "stack"),
-        ("Te1/2", "DIST1", "1/1/1", "switch", "10G", "fiber", "Po10"),
-        ("Te1/3", "DIST1", "1/1/2", "switch", "10G", "fiber", "Po10"),
-        ("Te1/4", "DIST2", "1/1/1", "switch", "10G", "fiber", "Po20"),
-        ("Te1/5", "DIST2", "1/1/2", "switch", "10G", "fiber", "Po20"),
-        ("Te1/10", "FW-A", "port1", "firewall", "10G", "fiber", "normal"),
-        ("Te1/11", "FW-B", "port1", "firewall", "10G", "fiber", "normal"),
-    ],
-    "CORE2": [
-        ("Te1/1", "CORE1", "Te1/1", "switch", "40G", "stacking", "stack"),
-        ("Te1/2", "DIST1", "1/1/3", "switch", "10G", "fiber", "Po11"),
-        ("Te1/3", "DIST1", "1/1/4", "switch", "10G", "fiber", "Po11"),
-        ("Te1/4", "DIST2", "1/1/3", "switch", "10G", "fiber", "Po21"),
-        ("Te1/5", "DIST2", "1/1/4", "switch", "10G", "fiber", "Po21"),
-        ("Te1/10", "FW-A", "port2", "firewall", "10G", "fiber", "normal"),
-        ("Te1/11", "FW-B", "port2", "firewall", "10G", "fiber", "normal"),
-    ],
->>>>>>> main
-    "DIST1": [("1/1/5", "EDGE1", "1", "switch", "1G", "copper", "normal"), ("1/1/6", "EDGE2", "1", "switch", "1G", "copper", "normal"), ("1/1/7", "ACCESS1", "1", "switch", "1G", "copper", "normal")],
-    "DIST2": [("1/1/5", "EDGE3", "1", "switch", "1G", "copper", "normal"), ("1/1/6", "EDGE4", "1", "switch", "1G", "copper", "normal"), ("1/1/7", "ACCESS2", "1", "switch", "1G", "copper", "normal")],
-    "EDGE1": [("2", "EDGE5", "1", "switch", "1G", "dac", "normal"), ("3", "AP1", "eth0", "ap", "1G", "copper", "normal")],
-    "EDGE2": [("2", "EDGE6", "1", "switch", "1G", "dac", "normal"), ("3", "AP2", "eth0", "ap", "1G", "copper", "normal")],
-    "EDGE3": [("3", "AP3", "eth0", "ap", "1G", "copper", "normal")],
-    "EDGE4": [("3", "AP4", "eth0", "ap", "1G", "copper", "normal")],
-    "EDGE5": [], "EDGE6": [], "ACCESS1": [], "ACCESS2": [],
-}
-
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-for name, os_name, model, ip, stack, vendor in switches:
-    text = [f"{os_name} Software", f"hostname {name}", f"Model number: {model}", f"Management Address: {ip}"]
-    if stack:
-        text.append("Stack member 1")
-    text += ["-- show running-config --", f"hostname {name}", "ip routing"]
-    if name.startswith("CORE"):
-        text.append("ip dhcp pool USERS")
-    if vendor == "procurve":
-        text.append("-- show lldp info remote-device detail --")
-    else:
-        text.append("-- show lldp neighbors detail --")
-    for local, remote, rport, rtype, speed, media, trunk in neighbors[name]:
-        text += [
-            f"Local Port: {local}",
-            f"Neighbor: {remote}" if vendor != "procurve" else f"System Name: {remote}",
-            f"Neighbor Port: {rport}" if vendor != "procurve" else f"Port Id: {rport}",
-            f"Type: {rtype}" if vendor != "procurve" else f"System Description: {rtype}",
-            f"Speed: {speed}",
-            f"Media: {media}",
-            f"Trunk: {trunk}",
-            "",
+def cisco_device(hostname: str, neighbors: list[tuple[str, str, str, str, str, str, str | None]], stp_blocked_port: str | None = None, stack: bool = False) -> str:
+    lines = [
+        f"hostname {hostname}",
+        "Cisco IOS XE Software",
+        "-- show lldp neighbors detail --",
+    ]
+    for local, remote, rport, rtype, speed, media, trunk in neighbors:
+        lines.extend(
+            [
+                f"Local Port: {local}",
+                f"Neighbor: {remote}",
+                f"Neighbor Port: {rport}",
+                f"Type: {rtype}",
+                f"Speed: {speed}",
+                f"Media: {media}",
+            ]
+        )
+        if trunk:
+            lines.append(f"Trunk: {trunk}")
+        lines.append("")
+    lines.extend(
+        [
+            "-- show spanning-tree --",
+            "This bridge is the root" if hostname == "CORE1" else "Spanning tree enabled",
+            (f"Blocking {stp_blocked_port}" if stp_blocked_port else ""),
+            "-- show etherchannel summary --",
+            "Po1(SU) LACP Gi1/0/1 Gi1/0/2",
+            "-- show interfaces status --",
+            "Gi1/0/1 connected trunk a-full a-10000",
+            "-- show vlan brief --",
+            "10 Users",
+            "20 Voice",
+            "30 Servers",
+            "-- show ip route --",
+            "C 10.0.0.0/24 is directly connected",
+            "S 0.0.0.0/0 via 10.0.0.1",
+            "-- show ip dhcp pool --",
+            "ip dhcp pool BRANCH_POOL",
         ]
-    text.append("-- show spanning-tree --")
-    if name in {"CORE1", "CORE2"}:
-        text.append("This bridge is the root" if vendor == "cisco" else "Root this switch")
-    if name == "DIST1":
-        text.append("BLK 1/1/6")
-    text += ["-- show vlan --", "10 Users", "20 Voice", "30 Servers", "-- show ip route --", "C 10.10.10.0/24 is directly connected", "S 0.0.0.0/0 via 10.0.0.254"]
-    if name.startswith("CORE"):
-        text += ["-- show ip dhcp pool --", "ip dhcp pool USERS"]
-
-    for base in [sample_data, samples]:
-        (base / f"{name}.txt").write_text("\n".join(text))
-=======
-for name, os_name, model, ip, stack in switches:
-    text = []
-    text.append(f"{os_name} Software")
-    text.append(f"hostname {name}")
-    text.append(f"Model number: {model}")
-    text.append(f"Management Address: {ip}")
+    )
     if stack:
-        text.append("Stack member 1")
-    text.append("-- show running-config --")
-    text.append(f"hostname {name}")
-    text.append("ip routing")
-    if name.startswith("CORE"):
-        text.append("ip dhcp pool USERS")
-    text.append("-- show lldp neighbors detail --")
-    for local, remote, rport, rtype, speed, media, trunk in neighbors[name]:
-        text.append(f"Local Port: {local}")
-        text.append(f"Neighbor: {remote}")
-        text.append(f"Neighbor Port: {rport}")
-        text.append(f"Type: {rtype}")
-        text.append(f"Speed: {speed}")
-        text.append(f"Media: {media}")
-        text.append(f"Trunk: {trunk}")
-        text.append("")
-    text.append("-- show spanning-tree --")
-    if name in {"CORE1", "CORE2"}:
-        text.append("This bridge is the root")
-    if name == "DIST1":
-        text.append("BLK 1/1/6")
-    text.append("-- show vlan --")
-    text.append("10 Users")
-    text.append("20 Voice")
-    text.append("30 Servers")
-    text.append("-- show ip route --")
-    text.append("C 10.10.10.0/24 is directly connected")
-    text.append("S 0.0.0.0/0 via 10.0.0.254")
-    if name.startswith("CORE"):
-        text.append("-- show ip dhcp pool --")
-        text.append("Pool USERS 10.10.10.0/24")
-    (root / f"{name}.txt").write_text("\n".join(text))
->>>>>>> main
+        lines.extend(["Switch 1 Provisioned", "Switch 2 Provisioned", "Stack member 1"]) 
+    return "\n".join([line for line in lines if line is not None])
 
-ini = """[firewall]
-ha=true
-nodes=FW-A,FW-B
-model=Fortigate-200F
-role_1=active
-role_2=standby
-sync_link=true
 
-[isp:ISP-A]
-circuit_id=CIR-100
-media=fiber
-speed=10G
+def procurve_device(hostname: str, neighbors: list[tuple[str, str, str, str, str, str, str | None]]) -> str:
+    lines = [
+        f"hostname {hostname}",
+        "HP ProCurve Switch 5406zl",
+        "-- show lldp info remote-device detail --",
+    ]
+    for local, remote, rport, rtype, speed, media, trunk in neighbors:
+        lines.extend(
+            [
+                f"Local Port: {local}",
+                f"System Name: {remote}",
+                f"Port Id: {rport}",
+                f"System Description: {rtype}",
+                f"Speed: {speed}",
+                f"Media: {media}",
+            ]
+        )
+        if trunk:
+            lines.append(f"Trunk: {trunk}")
+        lines.append("")
+    lines.extend(
+        [
+            "-- show spanning-tree --",
+            "This switch is root" if hostname == "DIST1" else "Spanning tree active",
+            "-- show vlan --",
+            "10 Users",
+            "20 Voice",
+            "-- show ip route --",
+            "C 172.16.10.0/24 directly connected",
+        ]
+    )
+    return "\n".join(lines)
 
-[isp:ISP-B]
-circuit_id=CIR-200
-media=fiber
-speed=1G
+
+def aruba_device(hostname: str, neighbors: list[tuple[str, str, str, str, str, str, str | None]], blocked_port: str | None = None) -> str:
+    lines = [
+        f"hostname {hostname}",
+        "ArubaOS-Switch",
+        "-- show lldp neighbors detail --",
+    ]
+    for local, remote, rport, rtype, speed, media, trunk in neighbors:
+        lines.extend(
+            [
+                f"Local Port: {local}",
+                f"Neighbor: {remote}",
+                f"Neighbor Port: {rport}",
+                f"Type: {rtype}",
+                f"Speed: {speed}",
+                f"Media: {media}",
+            ]
+        )
+        if trunk:
+            lines.append(f"Trunk: {trunk}")
+        lines.append("")
+    lines.extend(
+        [
+            "-- show spanning-tree --",
+            "Root this switch" if hostname == "DIST2" else "Spanning tree enabled",
+            (f"BLK {blocked_port}" if blocked_port else ""),
+            "-- show vlan --",
+            "10 Users",
+            "30 Servers",
+            "-- show ip route --",
+            "O 10.10.0.0/16 via 10.0.0.2",
+            "-- show dhcp-server --",
+            "Pool WLAN_POOL",
+        ]
+    )
+    return "\n".join([line for line in lines if line])
+
+
+def build_text_files() -> dict[str, str]:
+    return {
+        "CORE1.txt": cisco_device(
+            "CORE1",
+            [
+                ("Gi1/0/1", "CORE2", "Gi1/0/1", "switch", "10G", "fiber", "Po1"),
+                ("Gi1/0/2", "CORE2", "Gi1/0/2", "switch", "10G", "fiber", "Po1"),
+                ("Gi1/0/3", "DIST1", "A1", "switch", "10G", "fiber", None),
+                ("Gi1/0/4", "DIST2", "1/1/1", "switch", "10G", "fiber", None),
+            ],
+            stack=True,
+        ),
+        "CORE2.txt": cisco_device(
+            "CORE2",
+            [
+                ("Gi1/0/1", "CORE1", "Gi1/0/1", "switch", "10G", "fiber", "Po1"),
+                ("Gi1/0/2", "CORE1", "Gi1/0/2", "switch", "10G", "fiber", "Po1"),
+                ("Gi1/0/3", "DIST1", "A2", "switch", "10G", "fiber", None),
+                ("Gi1/0/4", "DIST2", "1/1/2", "switch", "10G", "fiber", None),
+            ],
+            stack=True,
+        ),
+        "DIST1.txt": procurve_device(
+            "DIST1",
+            [
+                ("A1", "CORE1", "Gi1/0/3", "switch", "10G", "fiber", None),
+                ("A2", "CORE2", "Gi1/0/3", "switch", "10G", "fiber", None),
+                ("A3", "EDGE1", "1/1/1", "switch", "1G", "copper", None),
+                ("A4", "EDGE2", "1/1/1", "switch", "1G", "copper", None),
+                ("A5", "AP-1", "eth0", "access point", "1G", "copper", None),
+            ],
+        ),
+        "DIST2.txt": aruba_device(
+            "DIST2",
+            [
+                ("1/1/1", "CORE1", "Gi1/0/4", "switch", "10G", "fiber", None),
+                ("1/1/2", "CORE2", "Gi1/0/4", "switch", "10G", "fiber", None),
+                ("1/1/3", "EDGE3", "1/1/1", "switch", "1G", "copper", None),
+                ("1/1/4", "EDGE4", "1/1/1", "switch", "1G", "copper", None),
+                ("1/1/5", "AP-2", "eth0", "ap", "1G", "copper", None),
+            ],
+            blocked_port="1/1/3",
+        ),
+        "EDGE1.txt": aruba_device("EDGE1", [("1/1/1", "DIST1", "A3", "switch", "1G", "copper", None), ("1/1/2", "ACCESS1", "A1", "switch", "1G", "copper", None)]),
+        "EDGE2.txt": aruba_device("EDGE2", [("1/1/1", "DIST1", "A4", "switch", "1G", "copper", None), ("1/1/2", "ACCESS2", "A1", "switch", "1G", "copper", None)]),
+        "EDGE3.txt": aruba_device("EDGE3", [("1/1/1", "DIST2", "1/1/3", "switch", "1G", "copper", None), ("1/1/2", "EDGE5", "1/1/1", "switch", "1G", "copper", None)]),
+        "EDGE4.txt": aruba_device("EDGE4", [("1/1/1", "DIST2", "1/1/4", "switch", "1G", "copper", None), ("1/1/2", "EDGE6", "1/1/1", "switch", "1G", "copper", None)]),
+        "EDGE5.txt": aruba_device("EDGE5", [("1/1/1", "EDGE3", "1/1/2", "switch", "1G", "copper", None), ("1/1/2", "SERVER1", "eth1", "server", "1G", "copper", None), ("1/1/3", "AP-3", "eth0", "access point", "1G", "copper", None)]),
+        "EDGE6.txt": aruba_device("EDGE6", [("1/1/1", "EDGE4", "1/1/2", "switch", "1G", "copper", None), ("1/1/2", "SERVER2", "eth1", "server", "1G", "copper", None), ("1/1/3", "AP-4", "eth0", "access point", "1G", "copper", None)]),
+        "ACCESS1.txt": procurve_device("ACCESS1", [("A1", "EDGE1", "1/1/2", "switch", "1G", "copper", None)]),
+        "ACCESS2.txt": procurve_device("ACCESS2", [("A1", "EDGE2", "1/1/2", "switch", "1G", "copper", None)]),
+    }
+
+
+def write_sample_ini(path: Path) -> None:
+    path.write_text(
+        """[firewall]
+ha = true
+nodes = FW-A, FW-B
+model = PA-3220
+sync_link = true
+disable_core_redundancy = false
+
+[isp:PrimaryISP]
+circuit_id = PRI-100
+speed = 10G
+media = fiber
+
+[isp:BackupISP]
+circuit_id = BAK-010
+speed = 1G
+media = copper
 
 [cloud:AWS-Prod]
-provider=AWS
-direct_to_firewall=false
+provider = AWS
+direct_to_firewall = false
 
 [cloud:Azure-DR]
-provider=Azure
-direct_to_firewall=false
+provider = Azure
+direct_to_firewall = false
 
 [cloud:Other-SaaS]
-provider=Other
-direct_to_firewall=false
+provider = Other
+direct_to_firewall = false
 """
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-(sample_data / "edge_template.ini").write_text(ini)
-(samples / "sample_edge.ini").write_text(ini)
-=======
-(root / "edge_template.ini").write_text(ini)
->>>>>>> main
+    )
 
-wb = Workbook()
-ws = wb.active
-ws.title = "devices"
-ws.append(["id", "type", "model", "mgmt_ip"])
-ws.append(["SRV1", "server", "Linux", "10.0.10.11"])
-ws.append(["SRV2", "server", "Windows", "10.0.10.12"])
-ws.append(["AP1", "ap", "Ubiquiti U6", "10.0.20.11"])
-ws.append(["AP2", "ap", "Ubiquiti U6", "10.0.20.12"])
-ws.append(["AP3", "ap", "Aruba AP", "10.0.20.13"])
-ws.append(["AP4", "ap", "Aruba AP", "10.0.20.14"])
-ws2 = wb.create_sheet("links")
-ws2.append(["src", "dst", "speed", "media", "type"])
-ws2.append(["EDGE5", "SRV1", "1G", "copper", "normal"])
-ws2.append(["EDGE6", "SRV2", "1G", "copper", "normal"])
-<<<<<<< codex/create-network-diagram-generator-web-service-h3lenu
-wb.save(sample_data / "manual_template.xlsx")
-shutil.copy2(sample_data / "manual_template.xlsx", samples / "sample_manual.xlsx")
 
-with zipfile.ZipFile(sample_data / "switch_exports.zip", "w", zipfile.ZIP_DEFLATED) as zf:
-    for txt in sorted(sample_data.glob("*.txt")):
-        zf.write(txt, txt.name)
-with zipfile.ZipFile(samples / "sample_bundle.zip", "w", zipfile.ZIP_DEFLATED) as zf:
-    for txt in sorted(samples.glob("*.txt")):
-=======
-wb.save(root / "manual_template.xlsx")
+def write_sample_excel(path: Path) -> None:
+    workbook = Workbook()
+    ws_devices = workbook.active
+    ws_devices.title = "devices"
+    ws_devices.append(["id", "type", "model", "mgmt_ip"])
+    ws_devices.append(["SERVER1", "server", "Linux", "10.10.30.11"])
+    ws_devices.append(["SERVER2", "server", "Windows", "10.10.30.12"])
+    ws_devices.append(["AP-1", "ap", "Aruba-AP", "10.10.40.21"])
+    ws_devices.append(["AP-2", "ap", "Aruba-AP", "10.10.40.22"])
+    ws_devices.append(["AP-3", "ap", "Aruba-AP", "10.10.40.23"])
+    ws_devices.append(["AP-4", "ap", "Aruba-AP", "10.10.40.24"])
 
-with zipfile.ZipFile(root / "switch_exports.zip", "w", zipfile.ZIP_DEFLATED) as zf:
-    for txt in sorted(root.glob("*.txt")):
->>>>>>> main
-        zf.write(txt, txt.name)
+    ws_links = workbook.create_sheet("links")
+    ws_links.append(["src", "dst", "speed", "media", "link_type", "trunk_id", "members"])
+    ws_links.append(["EDGE5", "SERVER1", "1G", "copper", "normal", "", 1])
+    ws_links.append(["EDGE6", "SERVER2", "1G", "copper", "normal", "", 1])
 
-print("sample data created")
+    workbook.save(path)
+
+
+def main() -> None:
+    SAMPLES_DIR.mkdir(parents=True, exist_ok=True)
+    SAMPLE_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    text_files = build_text_files()
+
+    for out_dir in (SAMPLES_DIR, SAMPLE_DATA_DIR):
+        for name, content in text_files.items():
+            (out_dir / name).write_text(content)
+
+    ini_path = SAMPLES_DIR / "sample_edge.ini"
+    xlsx_path = SAMPLES_DIR / "sample_manual.xlsx"
+    zip_path = SAMPLES_DIR / "sample_bundle.zip"
+
+    write_sample_ini(ini_path)
+    write_sample_excel(xlsx_path)
+
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        for name, content in text_files.items():
+            archive.writestr(name, content)
+
+    # compatibility mirror
+    (SAMPLE_DATA_DIR / "edge_template.ini").write_text(ini_path.read_text())
+    (SAMPLE_DATA_DIR / "sample_bundle.zip").write_bytes(zip_path.read_bytes())
+    (SAMPLE_DATA_DIR / "sample_manual.xlsx").write_bytes(xlsx_path.read_bytes())
+
+    print(f"Wrote sample artifacts in {SAMPLES_DIR}")
+
+
+if __name__ == "__main__":
+    main()

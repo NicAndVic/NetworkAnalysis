@@ -1,24 +1,24 @@
-Cisco IOS Software
 hostname EDGE4
-Model number: 9200
-Management Address: 10.0.2.4
--- show running-config --
-hostname EDGE4
-ip routing
+ArubaOS-Switch
 -- show lldp neighbors detail --
-Local Port: 3
-Neighbor: AP4
-Neighbor Port: eth0
-Type: ap
+Local Port: 1/1/1
+Neighbor: DIST2
+Neighbor Port: 1/1/4
+Type: switch
 Speed: 1G
 Media: copper
-Trunk: normal
-
+Local Port: 1/1/2
+Neighbor: EDGE6
+Neighbor Port: 1/1/1
+Type: switch
+Speed: 1G
+Media: copper
 -- show spanning-tree --
+Spanning tree enabled
 -- show vlan --
 10 Users
-20 Voice
 30 Servers
 -- show ip route --
-C 10.10.10.0/24 is directly connected
-S 0.0.0.0/0 via 10.0.0.254
+O 10.10.0.0/16 via 10.0.0.2
+-- show dhcp-server --
+Pool WLAN_POOL

@@ -1,69 +1,52 @@
-Cisco IOS-XE Software
 hostname CORE2
-Model number: C9500
-Management Address: 10.0.0.2
-Stack member 1
--- show running-config --
-hostname CORE2
-ip routing
-ip dhcp pool USERS
+Cisco IOS XE Software
 -- show lldp neighbors detail --
-Local Port: Te1/1
+Local Port: Gi1/0/1
 Neighbor: CORE1
-Neighbor Port: Te1/1
+Neighbor Port: Gi1/0/1
 Type: switch
-Speed: 40G
-Media: stacking
-Trunk: stack
+Speed: 10G
+Media: fiber
+Trunk: Po1
 
-Local Port: Te1/2
+Local Port: Gi1/0/2
+Neighbor: CORE1
+Neighbor Port: Gi1/0/2
+Type: switch
+Speed: 10G
+Media: fiber
+Trunk: Po1
+
+Local Port: Gi1/0/3
 Neighbor: DIST1
-Neighbor Port: 1/1/3
+Neighbor Port: A2
 Type: switch
 Speed: 10G
 Media: fiber
-Trunk: Po11
 
-Local Port: Te1/3
-Neighbor: DIST1
-Neighbor Port: 1/1/4
-Type: switch
-Speed: 10G
-Media: fiber
-Trunk: Po11
-
-Local Port: Te1/4
+Local Port: Gi1/0/4
 Neighbor: DIST2
-Neighbor Port: 1/1/3
+Neighbor Port: 1/1/2
 Type: switch
 Speed: 10G
 Media: fiber
-Trunk: Po21
-
-Local Port: Te1/5
-Neighbor: DIST2
-Neighbor Port: 1/1/4
-Type: switch
-Speed: 10G
-Media: fiber
-Trunk: Po21
-
-Local Port: Te1/10
-Neighbor: FW-B
-Neighbor Port: port1
-Type: firewall
-Speed: 10G
-Media: fiber
-Trunk: normal
 
 -- show spanning-tree --
-This bridge is the root
--- show vlan --
+Spanning tree enabled
+
+-- show etherchannel summary --
+Po1(SU) LACP Gi1/0/1 Gi1/0/2
+-- show interfaces status --
+Gi1/0/1 connected trunk a-full a-10000
+-- show vlan brief --
 10 Users
 20 Voice
 30 Servers
 -- show ip route --
-C 10.10.10.0/24 is directly connected
-S 0.0.0.0/0 via 10.0.0.254
+C 10.0.0.0/24 is directly connected
+S 0.0.0.0/0 via 10.0.0.1
 -- show ip dhcp pool --
-ip dhcp pool USERS
+ip dhcp pool BRANCH_POOL
+Switch 1 Provisioned
+Switch 2 Provisioned
+Stack member 1
