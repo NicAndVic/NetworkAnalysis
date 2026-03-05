@@ -3,6 +3,7 @@ from __future__ import annotations
 import io
 import math
 import re
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -43,6 +44,17 @@ def ensure_artifacts() -> None:
     if missing:
         fail(f"Missing sample artifacts: {', '.join(str(path) for path in missing)}")
 
+
+
+
+def verify_repo_hygiene() -> None:
+    bidi_cmd = [sys.executable, str(ROOT / "tools" / "check_bidi.py")]
+    bidi = subprocess.run(bidi_cmd, capture_output=True, text=True)
+    assert_true(bidi.returncode == 0, f"Bidi scan failed: {bidi.stdout}{bidi.stderr}")
+
+    tracked_generated = subprocess.check_output(["git", "ls-files"], text=True).splitlines()
+    bad = [path for path in tracked_generated if path.startswith("samples/generated/")]
+    assert_true(not bad, f"Generated artifacts must not be tracked: {', '.join(bad)}")
 
 def ingest_and_export() -> tuple[str, bytes]:
     client = TestClient(app)
@@ -194,6 +206,7 @@ def verify_svg(svg: str) -> None:
 
     label_texts = [t for t in texts if "edge-label" in t.attrib.get("class", "")]
     assert_true(label_texts, "Missing edge labels")
+    label_bboxes: list[tuple[float, float, float, float, str]] = []
     for label in label_texts:
         assert_true(label.attrib.get("text-anchor") == "middle", "Edge labels must use midpoint anchoring")
         txt = "".join(label.itertext())
@@ -204,6 +217,10 @@ def verify_svg(svg: str) -> None:
 
         for _, box in blockers:
             assert_true(not _box_intersects(bbox, box), f"Label overlaps node/cluster: {txt}")
+
+        for ob in label_bboxes:
+            assert_true(not _box_intersects(bbox, ob[:4]), f"Label-label overlap detected: {txt} overlaps {ob[4]}")
+        label_bboxes.append((*bbox, txt))
 
         seg = label.attrib.get("data-seg", "")
         assert_true(seg, f"Label {txt} missing data-seg metadata")
@@ -239,6 +256,7 @@ def verify_pdf(pdf_bytes: bytes) -> None:
 
 
 def main() -> None:
+    verify_repo_hygiene()
     ensure_artifacts()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     svg, pdf = ingest_and_export()

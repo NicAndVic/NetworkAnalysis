@@ -3,8 +3,13 @@ __pycache__/
 .venv/
 
 # Generated verification artifacts
-sample_data/generated/
+generated/
 samples/generated/
+sample_data/generated/
+
+# Generated/cache/temp dirs
+.cache/
+tmp/
 
 # Binary artifacts (not tracked in git)
 *.pdf

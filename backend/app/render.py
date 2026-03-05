@@ -60,6 +60,7 @@ class Renderer:
         self.channel_use_h: Dict[float, int] = {}
         self.channel_use_v: Dict[float, int] = {}
         self.label_boxes: List[Box] = []
+        self.edge_segments: List[Tuple[str, Tuple[float, float], Tuple[float, float]]] = []
 
     def _filter_devices(self) -> List[Device]:
         devices: List[Device] = []
@@ -279,12 +280,23 @@ class Renderer:
                 target_y = min(src_box.y, dst_box.y) - 26
             src_clusters = set(self._clusters_for_node(link.src))
             dst_clusters = set(self._clusters_for_node(link.dst))
+            cluster_map = dict(self.cluster_boxes)
             shared = src_clusters & dst_clusters
             if shared:
                 cid = sorted(shared)[0]
-                cbox = dict(self.cluster_boxes)[cid]
+                cbox = cluster_map[cid]
                 target_y = cbox.y - 12
-            ch = self._pick_channel(True, target_y, link.src, link.dst, s1, d1)
+                ch = target_y
+            elif src_clusters or dst_clusters:
+                # Ensure fast exit/entry from clusters by routing just outside boundary.
+                pick = sorted(src_clusters or dst_clusters)[0]
+                cbox = cluster_map[pick]
+                above = cbox.y - 12
+                below = cbox.y + cbox.h + 12
+                target_y = above if abs(above - s1[1]) <= abs(below - s1[1]) else below
+                ch = target_y
+            else:
+                ch = self._pick_channel(True, target_y, link.src, link.dst, s1, d1)
             points = [s0, s1, (s1[0], ch), (d1[0], ch), d1, d0]
         else:
             s0 = src_ports["S"] if dy >= sy else src_ports["N"]
@@ -338,7 +350,24 @@ class Renderer:
                 return True
         return False
 
-    def _place_label(self, text: str, seg: Tuple[Tuple[float, float], Tuple[float, float]]) -> Tuple[float, float, Box] | None:
+    def _segment_crosses_blocker(self, seg: Tuple[Tuple[float, float], Tuple[float, float]]) -> bool:
+        p1, p2 = seg
+        for box in list(self.node_boxes.values()) + [b for _, b in self.cluster_boxes]:
+            if self._seg_intersects_box(p1, p2, box):
+                return True
+        return False
+
+    def _label_overlaps_foreign_edges(self, box: Box, edge_id: str, is_vertical_label: bool) -> bool:
+        if not is_vertical_label:
+            return False
+        for other_id, p1, p2 in self.edge_segments:
+            if other_id == edge_id:
+                continue
+            if self._seg_intersects_box(p1, p2, box):
+                return True
+        return False
+
+    def _place_label(self, text: str, seg: Tuple[Tuple[float, float], Tuple[float, float]], edge_id: str) -> Tuple[float, float, Box] | None:
         p1, p2 = seg
         mx = (p1[0] + p2[0]) / 2
         my = (p1[1] + p2[1]) / 2
@@ -349,22 +378,24 @@ class Renderer:
         attempts: List[Tuple[float, float]] = []
         nudge_vals = [0, -2, 2, -4, 4, -8, 8, -10, 10]
         if "/stacking" in text:
-            nudge_vals = [0, -2, 2, -4, 4, -8, 8, -12, 12, -20, 20, -30, 30, -40, 40]
+            nudge_vals = [0, -2, 2, -4, 4, -8, 8, -12, 12, -20, 20, -30, 30, -40, 40, -56, 56, -72, 72]
         if is_horizontal:
-            for slide in [0, -6, 6, -12, 12, -20, 20]:
+            for slide in [0, -6, 6, -12, 12, -20, 20, -30, 30, -40, 40]:
                 for nudge in nudge_vals:
                     attempts.append((slide, nudge))
         else:
-            for slide in [0, -6, 6, -12, 12, -20, 20]:
+            for slide in [0, -6, 6, -12, 12, -20, 20, -30, 30, -40, 40]:
                 for nudge in nudge_vals:
                     attempts.append((nudge, slide))
 
-        blockers = list(self.node_boxes.values()) + [box for _, box in self.cluster_boxes]
+        blockers = list(self.node_boxes.values()) + [box for _, box in self.cluster_boxes] + self.label_boxes
         for ox, oy in attempts:
             x = mx + ox
             y = my + oy
             box = Box(x - width / 2, y - height + 2, width, height)
             if any(self._box_intersects(box, blocker) for blocker in blockers):
+                continue
+            if self._label_overlaps_foreign_edges(box, edge_id, not is_horizontal):
                 continue
             self.label_boxes.append(box)
             return x, y, box
@@ -409,12 +440,15 @@ class Renderer:
         self._clusterize(devices)
 
         routed_edges: List[RoutedEdge] = []
+        self.edge_segments = []
         edge_idx = 0
         for link in self.topo.links:
             routed = self._route_edge(f"e{edge_idx}", link)
             edge_idx += 1
             if routed:
                 routed_edges.append(routed)
+                for p1, p2 in zip(routed.points, routed.points[1:]):
+                    self.edge_segments.append((routed.edge_id, p1, p2))
 
         info_boxes = [
             ("Routing table", self.topo.route_lines),
@@ -489,29 +523,52 @@ class Renderer:
 
             placed = None
             all_segments = self._label_segment_candidates(routed.points)
-            candidates = [seg for seg in all_segments if not self._segment_midpoint_in_blocker(seg)]
+            candidates = [seg for seg in all_segments if (not self._segment_midpoint_in_blocker(seg) and not self._segment_crosses_blocker(seg))]
             if not candidates:
                 candidates = all_segments
             chosen_seg = candidates[0]
             for candidate_seg in candidates:
-                placed = self._place_label(label, candidate_seg)
+                placed = self._place_label(label, candidate_seg, routed.edge_id)
                 if placed is not None:
                     chosen_seg = candidate_seg
                     break
             if placed is None:
-                chosen_seg = candidates[0]
-                mx = (chosen_seg[0][0] + chosen_seg[1][0]) / 2
-                my = (chosen_seg[0][1] + chosen_seg[1][1]) / 2
-                lx, ly = mx, my
+                width = max(40.0, len(label) * 6.2)
+                base_blockers = list(self.node_boxes.values()) + [b for _, b in self.cluster_boxes] + self.label_boxes
+                fallback_offsets = [0, -2, 2, -4, 4, -8, 8, -12, 12, -20, 20]
+                fallback_slides = [0, -6, 6, -12, 12, -20, 20, -30, 30, -40, 40]
                 if link.media == "stacking":
-                    for off in [60, 72, 84]:
-                        testy = my - off
-                        width = max(40.0, len(label) * 6.2)
-                        tbox = Box(mx - width / 2, testy - 10, mx + width / 2 - (mx - width / 2), 12)
-                        blockers = list(self.node_boxes.values()) + [b for _, b in self.cluster_boxes]
-                        if not any(self._box_intersects(tbox, b) for b in blockers):
-                            ly = testy
+                    fallback_offsets = [0, -2, 2, -4, 4, -8, 8, -12, 12, -20, 20, -30, 30, -40, 40, -56, 56, -72, 72]
+
+                found = False
+                for candidate_seg in candidates:
+                    mx = (candidate_seg[0][0] + candidate_seg[1][0]) / 2
+                    my = (candidate_seg[0][1] + candidate_seg[1][1]) / 2
+                    is_horizontal = abs(candidate_seg[0][1] - candidate_seg[1][1]) < 1e-6
+                    for slide in fallback_slides:
+                        for off in fallback_offsets:
+                            tx = mx
+                            ty = my
+                            if is_horizontal:
+                                tx = mx + slide
+                                ty = my + off
+                            else:
+                                tx = mx + off
+                                ty = my + slide
+                            tbox = Box(tx - width / 2, ty - 10, width, 12)
+                            if any(self._box_intersects(tbox, b) for b in base_blockers):
+                                continue
+                            chosen_seg = candidate_seg
+                            lx, ly = tx, ty
+                            found = True
                             break
+                        if found:
+                            break
+                    if found:
+                        break
+
+                if not found:
+                    continue
             else:
                 lx, ly, _ = placed
             parts.append(
