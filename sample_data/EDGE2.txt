@@ -1,40 +1,24 @@
-HP ProCurve Software
 hostname EDGE2
-Model number: 2930F
-Management Address: 10.0.2.2
--- show running-config --
-hostname EDGE2
-ip routing
--- show lldp info remote-device detail --
-Local Port: 2
-System Name: EDGE6
-Port Id: 1
-System Description: switch
+ArubaOS-Switch
 -- show lldp neighbors detail --
-Local Port: 2
-Neighbor: EDGE6
-Neighbor Port: 1
+Local Port: 1/1/1
+Neighbor: DIST1
+Neighbor Port: A4
 Type: switch
 Speed: 1G
-Media: dac
-Trunk: normal
-
-Local Port: 3
-System Name: AP2
-Port Id: eth0
-System Description: ap
-Neighbor: AP2
-Neighbor Port: eth0
-Type: ap
+Media: copper
+Local Port: 1/1/2
+Neighbor: ACCESS2
+Neighbor Port: A1
+Type: switch
 Speed: 1G
 Media: copper
-Trunk: normal
-
 -- show spanning-tree --
+Spanning tree enabled
 -- show vlan --
 10 Users
-20 Voice
 30 Servers
 -- show ip route --
-C 10.10.10.0/24 is directly connected
-S 0.0.0.0/0 via 10.0.0.254
+O 10.10.0.0/16 via 10.0.0.2
+-- show dhcp-server --
+Pool WLAN_POOL

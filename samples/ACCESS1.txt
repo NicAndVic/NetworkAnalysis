@@ -1,16 +1,17 @@
-Cisco IOS Software
 hostname ACCESS1
-Model number: 2960
-Management Address: 10.0.3.1
--- show running-config --
-hostname ACCESS1
-ip routing
--- show lldp neighbors detail --
+HP ProCurve Switch 5406zl
+-- show lldp info remote-device detail --
+Local Port: A1
+System Name: EDGE1
+Port Id: 1/1/2
+System Description: switch
+Speed: 1G
+Media: copper
+
 -- show spanning-tree --
+Spanning tree active
 -- show vlan --
 10 Users
 20 Voice
-30 Servers
 -- show ip route --
-C 10.10.10.0/24 is directly connected
-S 0.0.0.0/0 via 10.0.0.254
+C 172.16.10.0/24 directly connected

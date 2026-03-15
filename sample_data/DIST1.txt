@@ -1,41 +1,45 @@
-ArubaOS-S Software
 hostname DIST1
-Model number: 6300
-Management Address: 10.0.1.1
--- show running-config --
-hostname DIST1
-ip routing
--- show lldp neighbors detail --
-Local Port: 1/1/5
-Neighbor: EDGE1
-Neighbor Port: 1
-Type: switch
-Speed: 1G
-Media: copper
-Trunk: normal
+HP ProCurve Switch 5406zl
+-- show lldp info remote-device detail --
+Local Port: A1
+System Name: CORE1
+Port Id: Gi1/0/3
+System Description: switch
+Speed: 10G
+Media: fiber
 
-Local Port: 1/1/6
-Neighbor: EDGE2
-Neighbor Port: 1
-Type: switch
-Speed: 1G
-Media: copper
-Trunk: normal
+Local Port: A2
+System Name: CORE2
+Port Id: Gi1/0/3
+System Description: switch
+Speed: 10G
+Media: fiber
 
-Local Port: 1/1/7
-Neighbor: ACCESS1
-Neighbor Port: 1
-Type: switch
+Local Port: A3
+System Name: EDGE1
+Port Id: 1/1/1
+System Description: switch
 Speed: 1G
 Media: copper
-Trunk: normal
+
+Local Port: A4
+System Name: EDGE2
+Port Id: 1/1/1
+System Description: switch
+Speed: 1G
+Media: copper
+
+Local Port: A5
+System Name: AP-1
+Port Id: eth0
+System Description: access point
+Speed: 1G
+Media: copper
 
 -- show spanning-tree --
-BLK 1/1/6
+This switch is root
 -- show vlan --
 10 Users
 20 Voice
-30 Servers
 -- show ip route --
-C 10.10.10.0/24 is directly connected
-S 0.0.0.0/0 via 10.0.0.254
+C 172.16.10.0/24 directly connected
